@@ -1,5 +1,5 @@
-import { Button, Dialog, Icon, Input, TextArea } from '@ui5/webcomponents-react';
-import { useState } from 'react';
+import { Button, Dialog, Icon, Input, Option, Select, TextArea } from '@ui5/webcomponents-react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { api } from '../api';
 import { Card, Chip, Cta, EmptyState, ErrorNote, Field, InfoTip, Note, PageHead, StepFooter, Toggle } from '../components/ui';
@@ -7,33 +7,39 @@ import { useI18n } from '../i18n';
 import { useApp } from '../state';
 
 const MODES = ['remote', 'hybrid', 'onsite'];
+const GENDERS = ['prefer_not_to_say', 'female', 'male', 'non_binary', 'other'];
+const BREAK_REASONS = ['caregiving', 'health', 'study', 'relocation', 'other'];
 const cap = (s: string) => (s ? s.charAt(0).toUpperCase() + s.slice(1) : s);
 
 export default function Profile() {
   const { t, tf } = useI18n();
   const nav = useNavigate();
-  const { profile, setProfile, consent, setConsent, saveProfile, candidateId, resetDemo, toast } = useApp();
+  const { profile, setProfile, consent, setConsent, saveProfile, candidateId, resetDemo, toast, startOwn, startSample, isSample } = useApp();
   const [err, setErr] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState(false);
+  const [langText, setLangText] = useState<string | null>(null);
+  useEffect(() => setLangText(null), [candidateId, isSample, !profile]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (!profile)
     return (
       <>
         <PageHead step="profile" title={t('profile.title')} />
-        <EmptyState kind="evidence" title={t('profile.empty_title')} text={t('profile.empty_text')} action={<Cta onClick={() => nav('/')}>{t('profile.empty_cta')}</Cta>} />
+        <EmptyState kind="evidence" title={t('profile.empty_title')} text={t('profile.empty_text')}
+          action={<div className="row wrap center"><Cta onClick={() => startOwn()} testId="start-own">{t('home.start')}</Cta><Cta variant="ghost" onClick={() => startSample()}>{t('home.start_sample')}</Cta></div>} />
       </>
     );
   const wc = profile.work_conditions;
   const acc = profile.accommodations ?? { shareable_work_accommodations: [], private_note: '' };
-  const set = (patch: any) => setProfile({ ...profile, ...patch });
+  const set = (patch: any) => { setErr(null); setProfile({ ...profile, ...patch }); };
   const setWC = (patch: any) => set({ work_conditions: { ...wc, ...patch } });
   const toggleMode = (m: string) => setWC({ work_modes: wc.work_modes.includes(m) ? wc.work_modes.filter((x: string) => x !== m) : [...wc.work_modes, m] });
 
   const save = async () => {
     setErr(null);
     if (!consent.process_profile) return setErr(t('profile.err_consent'));
-    if (!profile.display_name?.trim() || !profile.location_city?.trim()) return setErr(t('profile.err_required'));
+    if ((profile.display_name ?? '').trim().length < 2 || (profile.location_city ?? '').trim().length < 2) return setErr(t('profile.err_required'));
+    if (!(profile.languages ?? []).length) return setErr(t('profile.err_languages'));
     if (!wc.work_modes.length) return setErr(t('profile.err_modes'));
     setBusy(true);
     try {
@@ -60,18 +66,25 @@ export default function Profile() {
     nav('/');
   };
   const breakYears = Math.round((profile.career_break?.months ?? 0) / 12);
+  const setBreak = (patch: any) => set({ career_break: { months: 0, reason: null, wording: '', ...(profile.career_break ?? {}), ...patch } });
+  const num = (v: string) => (v === '' ? null : Number(v));
   return (
     <>
       <PageHead step="profile" icon="shield" title={t('profile.title')} sub={t('profile.sub')} />
+      <Note tone="info" icon={isSample ? 'hint' : 'edit'} testId="profile-mode">{isSample ? t('profile.mode_sample') : t('profile.mode_own')}</Note>
       <div className="grid cols-2 stagger">
         <Card title={t('profile.about')} icon="person-placeholder">
           <div className="form-grid">
-            <Field label={t('profile.name')}><Input value={profile.display_name} onInput={(e: any) => set({ display_name: e.target.value })} accessibleName={t('profile.name')} /></Field>
-            <Field label={t('profile.city')}><Input value={profile.location_city} onInput={(e: any) => set({ location_city: e.target.value, work_conditions: { ...wc, commute_city: e.target.value } })} accessibleName={t('profile.city')} /></Field>
-            <Field label={t('profile.languages')} hint={t('profile.languages_hint')}>
-              <Input value={(profile.languages ?? []).join(', ')} onInput={(e: any) => set({ languages: e.target.value.split(',').map((x: string) => x.trim()).filter(Boolean) })} accessibleName={t('profile.languages')} />
+            <Field label={t('profile.name') + ' *'}><Input value={profile.display_name ?? ''} onInput={(e: any) => set({ display_name: e.target.value })} accessibleName={t('profile.name')} data-testid="profile-name" /></Field>
+            <Field label={t('profile.city') + ' *'}><Input value={profile.location_city ?? ''} onInput={(e: any) => set({ location_city: e.target.value, location_wording: '', work_conditions: { ...wc, commute_city: e.target.value } })} accessibleName={t('profile.city')} data-testid="profile-city" /></Field>
+            <Field label={t('profile.state')}><Input value={profile.location_state ?? ''} onInput={(e: any) => set({ location_state: e.target.value, location_wording: '' })} accessibleName={t('profile.state')} data-testid="profile-state" /></Field>
+            <Field label={t('profile.languages') + ' *'} hint={t('profile.languages_hint')}>
+              <Input value={langText ?? (profile.languages ?? []).join(', ')} onInput={(e: any) => { setLangText(e.target.value); set({ languages: e.target.value.split(',').map((x: string) => x.trim()).filter(Boolean) }); }} accessibleName={t('profile.languages')} data-testid="profile-languages" />
             </Field>
-            <Field label={t('profile.goal')}><Input value={profile.goal} onInput={(e: any) => set({ goal: e.target.value })} accessibleName={t('profile.goal')} /></Field>
+            <Field label={t('profile.experience')} hint={t('profile.experience_hint')}>
+              <Input type="Number" value={String(profile.relevant_experience_years ?? 0)} onInput={(e: any) => set({ relevant_experience_years: Math.max(0, Number(e.target.value) || 0) })} accessibleName={t('profile.experience')} data-testid="profile-experience" />
+            </Field>
+            <Field label={t('profile.goal')}><Input value={profile.goal ?? ''} placeholder={t('profile.goal_ph')} onInput={(e: any) => set({ goal: e.target.value })} accessibleName={t('profile.goal')} data-testid="profile-goal" /></Field>
           </div>
         </Card>
 
@@ -110,10 +123,21 @@ export default function Profile() {
         </Card>
 
         <Card title={<>{t('profile.fairness')}<InfoTip>{t('profile.fairness_info')}</InfoTip></>} icon="compare" className="span-2">
-          <div className="fact-row">
-            <div className="fact"><span>{t('profile.age')}</span><b>{profile.age}</b></div>
-            <div className="fact"><span>{t('profile.gender')}</span><b data-testid="gender-value">{tf('gender.' + profile.gender, cap(profile.gender ?? ''))}</b></div>
-            <div className="fact"><span>{t('profile.break')}</span><b>{t('profile.break_value', { years: breakYears, reason: tf('breakreason.' + profile.career_break?.reason, cap(profile.career_break?.reason ?? '')) })}</b></div>
+          <p className="muted small">{t('profile.fairness_optional')}</p>
+          <div className="form-grid five">
+            <Field label={t('profile.age')}><Input type="Number" value={profile.age == null ? '' : String(profile.age)} onInput={(e: any) => set({ age: num(e.target.value) })} accessibleName={t('profile.age')} data-testid="profile-age" /></Field>
+            <Field label={t('profile.gender')}>
+              <Select accessibleName={t('profile.gender')} onChange={(e) => set({ gender: e.detail.selectedOption.getAttribute('value') === 'prefer_not_to_say' ? null : e.detail.selectedOption.getAttribute('value') })} data-testid="profile-gender">
+                {GENDERS.map((g) => <Option key={g} value={g} selected={(profile.gender ?? 'prefer_not_to_say') === g}>{tf('gender.' + g, cap(g))}</Option>)}
+              </Select>
+            </Field>
+            <Field label={t('profile.break_years')}><Input type="Number" value={String(breakYears)} onInput={(e: any) => { const months = Math.max(0, Math.round((Number(e.target.value) || 0) * 12)); setBreak({ months, reason: months ? (profile.career_break?.reason ?? 'caregiving') : null }); }} accessibleName={t('profile.break_years')} data-testid="profile-break-years" /></Field>
+            <Field label={t('profile.break_reason')}>
+              <Select accessibleName={t('profile.break_reason')} disabled={!breakYears} onChange={(e) => setBreak({ reason: e.detail.selectedOption.getAttribute('value') })} data-testid="profile-break-reason">
+                {BREAK_REASONS.map((r) => <Option key={r} value={r} selected={(profile.career_break?.reason ?? 'caregiving') === r}>{tf('breakreason.' + r, cap(r))}</Option>)}
+              </Select>
+            </Field>
+            <Field label={t('profile.college')}><Input value={profile.college ?? ''} onInput={(e: any) => set({ college: e.target.value })} accessibleName={t('profile.college')} data-testid="profile-college" /></Field>
           </div>
         </Card>
       </div>

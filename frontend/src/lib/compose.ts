@@ -107,9 +107,11 @@ export const flagWhy = (i: I18nApi, f: any) => i.tf(`flagwhy.${f.category}.${f.a
 export function milestoneText(i: I18nApi, m: any, field: 'task' | 'why'): string {
   const original = field === 'task' ? m.practice_task : m.why_it_matters;
   const key = `ms.${m.capability.replace(/\./g, '_')}.${field}`;
-  return m.generated_by === 'deterministic template' && !m.text_edited && i.has(key) ? i.t(key) : original;
+  if (m.generated_by !== 'deterministic template' || m.text_edited) return original;
+  return i.has(key) ? i.t(key) : i.t('ms.generic.' + field); // capabilities without their own template use the generic wording
 }
 export function milestoneEvidence(i: I18nApi, m: any): string[] {
   const key = `ms.${m.capability.replace(/\./g, '_')}.evidence`;
-  return m.generated_by === 'deterministic template' && !m.text_edited && i.has(key) ? i.t(key).split('|') : m.required_evidence;
+  if (m.generated_by !== 'deterministic template' || m.text_edited) return m.required_evidence;
+  return (i.has(key) ? i.t(key) : i.t('ms.generic.evidence')).split('|');
 }

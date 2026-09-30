@@ -10,7 +10,7 @@ import { useApp } from '../state';
 const NEVER = ['name', 'gender', 'age', 'disability', 'college', 'career_break'];
 const FEATURES = ['languages', 'commute_city', 'work_modes', 'can_relocate', 'weekly_learning_hours', 'relevant_experience_years', 'schedule_needs'];
 const TWIN_ICON: Record<string, string> = {
-  man: 'male', name_community: 'person-placeholder', age_young: 'calendar', age_older: 'calendar', break_none: 'history', break_long: 'history',
+  man: 'male', woman: 'female', break_added: 'history', name_community: 'person-placeholder', age_young: 'calendar', age_older: 'calendar', break_none: 'history', break_long: 'history',
   disability: 'accessibility', college: 'education', hometown: 'map',
 };
 const PERT_KEY: Record<string, string> = { display_name: 'name', gender: 'gender', age: 'age', career_break: 'career_break', disability: 'disability', college: 'college' };
@@ -49,7 +49,8 @@ export default function Fairness() {
     if (v === null || v === undefined || v === '') {
       if (field === 'college') return t('fair.v_not_named');
       if (field === 'disability') return t('fair.v_none');
-      return t('fair.v_hidden');
+      // Staff without evidence access never receive the person's real details; for the person themselves, blank means "not given".
+      return role === 'candidate' || role === 'counsellor' ? t('fair.v_not_given') : t('fair.v_hidden');
     }
     if (field === 'gender') return tf('gender.' + v, String(v));
     if (field === 'career_break') return Number(v) === 0 ? t('fair.v_none') : t('fair.v_years', { n: Math.round(Number(v) / 12) });

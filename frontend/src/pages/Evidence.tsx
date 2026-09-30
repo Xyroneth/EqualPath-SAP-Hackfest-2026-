@@ -97,6 +97,7 @@ export default function Evidence() {
     <>
       <PageHead step="evidence" icon="upload-to-cloud" title={t('evidence.title')} sub={mine ? t('evidence.sub') : t('evidence.sub_staff')} />
       {!mine && <Note tone="info" icon="shield">{t('evidence.staff_note')}</Note>}
+      {mine && docs.length === 0 && <Note tone="info" icon="hint" testId="evidence-tip">{t('evidence.tip_own')}</Note>}
       <div className={`evidence-layout ${mine ? '' : 'single'}`}>
         <div className="doc-grid stagger" data-testid="doc-grid">
           {docs.map((d, i) => (
@@ -157,7 +158,7 @@ export default function Evidence() {
               <div className="form-grid">
                 <Field label={t('evidence.name')}><Input value={title} onInput={(e: any) => setTitle(e.target.value)} accessibleName={t('evidence.name')} data-testid="evidence-title" /></Field>
                 <Field label={t('evidence.kind')}>
-                  <Select accessibleName={t('evidence.kind')} onChange={(e) => setType(e.detail.selectedOption.getAttribute('value')!)}>
+                  <Select accessibleName={t('evidence.kind')} onChange={(e) => setType(e.detail.selectedOption.getAttribute('value')!)} data-testid="evidence-kind">
                     {TYPES.map((k) => <Option key={k} value={k} selected={type === k}>{tf('etype.' + k, k)}</Option>)}
                   </Select>
                 </Field>

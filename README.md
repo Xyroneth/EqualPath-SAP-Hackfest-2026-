@@ -4,7 +4,7 @@
 
 EQUALPATH is a skills-first, multi-agent **Career Orchestrator**. It turns a non-traditional candidate's real work (projects, work samples, certificates, learning records) into evidence-backed capabilities. It also checks whether the employer's role is ready for that candidate. Six specialised AI agents and one human approval layer produce a transparent **Mutual Readiness Passport**.
 
-The demo persona is **Priya Sharma**: 31, from Lucknow (a tier-2 city), a former junior software tester returning to work after a four-year caregiving break.
+**Anyone can use it.** On the home page, *Start with your details* opens an empty profile: a person enters their own details (or someone else's, with their agreement), adds their own documents, and every agent works from that. For a quick look there is also an optional sample profile, **Priya Sharma**: 31, from Lucknow (a tier-2 city), a former junior software tester returning to work after a four-year caregiving break, with six sample documents.
 
 ---
 
@@ -19,7 +19,12 @@ The demo persona is **Priya Sharma**: 31, from Lucknow (a tier-2 city), a former
 
 Requirements: Python 3.12+ and Node 20+ (or just Docker). **No credentials are needed.** Without them, EQUALPATH runs in *deterministic demo mode* and says so in the header. To use an LLM, copy `.env.example` to `.env` and fill in SAP AI Core or an OpenAI-compatible key.
 
-Click **Start Priya's demo** and follow [`DEMO_SCRIPT.md`](DEMO_SCRIPT.md) (about 4 minutes). Each step ends with a **Next** button, and the side menu still lets you jump anywhere.
+Two ways to begin, both on the home page:
+
+- **Start with your details**: an empty profile. Only name, city, languages and work mode are required. Age, gender, career break and college are optional and are used only by the fairness check. Then upload files or paste text as evidence (a resume alone gives *claimed* skills; work samples, projects and certificates give *proven* ones). Skills are read from those documents, roles are ranked for that person, the learning plan covers their gaps, and the fairness twins are built from their profile.
+- **Try the sample profile**: loads Priya and her six documents. Follow [`DEMO_SCRIPT.md`](DEMO_SCRIPT.md) (about 4 minutes).
+
+Each step ends with a **Next** button, and the side menu still lets you jump anywhere. **Start over** in the menu clears the current person so another one can be entered.
 
 ### Who am I acting as? (sign-in)
 
@@ -156,7 +161,8 @@ HTTPS is terminated by the Cloud Foundry router. On CF the container disk is eph
 
 ## 6. Acceptance tests
 
-`./scripts/test.sh` runs 54 pytest tests and 5 Playwright journeys (guided demo with the HR and Auditor tasks, staff sign-in, blocked pages, dark mode and Hindi, menu access):
+`./scripts/test.sh` runs 63 pytest tests and 6 Playwright journeys (the sample demo with the HR and Auditor tasks, a second person entering their own details, staff sign-in, blocked pages, dark mode and Hindi, menu access):
+- A different person (own profile, own pasted documents) goes through the whole journey for **each of the five roles**: skills come from their documents, every open gap gets a learning step with a real resource, and the fairness twins are built from their profile. A person with no catalog skills still gets an honest result, and invalid profiles are refused with a clear message.
 - Every role has its own employer ad; each improved ad and each suggested rewrite scans clean; new barrier types (age, gender or marital preference, physical requirement, walk-in interviews) are found and removed.
 - HR can answer conflicting claims and respond to the candidate only after the passport is issued and only with her consent; HR cannot make the passport decision; the auditor alone verifies the log and signs off fairness.
 - The fairness twins keep identical scores, the biased control filter is caught, and the candidate's real details are hidden from HR and the auditor.
@@ -177,7 +183,8 @@ HTTPS is terminated by the Cloud Foundry router. On CF the container disk is eph
 
 ## 7. Limitations and assumptions
 
-- **Seeded and simulated data**: the persona is fictional; roles, JDs, employer questionnaire, policy documents and candidate feedback are seeded or simulated and labelled on screen. There is no job-site scraping.
+- **Small sample catalog**: the rule-based skill finder (used when no AI key is set) recognises the 19 skills in `skills_taxonomy.json`, and roles are ranked from five sample roles. Someone from another field gets an honest, but thin, result. With an AI provider configured, extraction is not limited to those wording patterns.
+- **Seeded and simulated data**: the sample persona is fictional; roles, JDs, employer questionnaire, policy documents and candidate feedback are seeded or simulated and labelled on screen. There is no job-site scraping.
 - **Deterministic demo mode** uses an auditable rule-based extractor with the same schema and validators. Live LLM quality depends on the configured model.
 - **SAP Learning Hub**: links were checked automatically on 2026-09-29 (public landing pages return HTTP 200). *The team must still confirm each asset in its student-edition account* and set `team_verified_on` in `learning_assets.json`. There is no progress API; "started" is self-reported.
 - **Evidence upload** accepts PDF, DOCX, PPTX, XLSX, CSV, text, code and PNG/JPG (max 8 MB). Images cannot be read automatically, so the candidate describes them. Scanned PDFs without a text layer produce no text.

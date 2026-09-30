@@ -5,14 +5,15 @@
 - Check the AI chip in the top bar: *AI: SAP AI Core* if credentials are set, otherwise *AI: Demo mode*. Say which one out loud.
 - Staff passwords (also in the README): **Counsellor** `Counsel@2026`, **HR Reviewer** `HRreview@2026`, **Auditor** `Audit@2026`.
 - Keep a fallback: screenshots from `EQUALPATH_SHOTS=docs/screenshots npx playwright test`, or a screen recording.
-- Resetting: **Start over** in the menu, or *Start Priya's demo* on the home page, always begins a fresh run.
+- Resetting: **Start over** in the menu, or *Try the sample profile* on the home page, always begins a fresh run.
+- This script uses the **sample profile** (Priya) so the timing is predictable. The app is not limited to her: *Start with your details* lets anyone enter their own profile and documents (see the end of this page).
 - The app is in **English or हिन्दी** (globe menu in the top bar) and has a **dark mode** (moon button). Both are safe to show live.
 
 The coloured bar under the top bar always says who you are acting as. Every step ends with a big **Next** button, so you never have to hunt through the menu. The menu still works if you prefer it.
 
 | Time | Step | Click | Say |
 |---|---|---|---|
-| 0:00 | **1. Profile and consent** | *Start Priya's demo* → tick both consent boxes → *Save and continue* | "Priya, 31, Lucknow. Three years as a tester, then a four-year caregiving break. Consent comes first: nothing is shared without her approval. Gender, age and career break are used only to test fairness, never for ranking." Tap the **(i)** next to *Accessibility and accommodations* to show the privacy note. |
+| 0:00 | **1. Profile and consent** | *Try the sample profile* → tick both consent boxes → *Save and continue* | "Priya, 31, Lucknow. Three years as a tester, then a four-year caregiving break. Consent comes first: nothing is shared without her approval. Gender, age and career break are used only to test fairness, never for ranking." Tap the **(i)** next to *Accessibility and accommodations* to show the privacy note. |
 | 0:30 | **2. Evidence** | Open *resume.pdf* and *defect-tracker.xlsx* (**View** opens a new tab) → *Analyse my evidence* | "Real documents, not text blobs: PDFs with charts and screenshots, and an Excel tracker with a dashboard. She can add PDF, Word, PowerPoint, Excel, CSV, code, text or images. Only Priya, and the counsellor she is working with, can open them, and every opening is logged." The page moves on by itself when the agents finish. |
 | 1:05 | **3. Skills (human pause 1)** | Point at **Claimed** on *Browser test automation* → optionally *Remove* a skill with a reason → *Approve and continue* | "Every skill shows the exact quote and source. **Selenium is only in her resume, so it stays *Claimed*.** The model cannot upgrade it; the status is set in code. The agents wait until Priya approves." |
 | 1:25 | **4. Role options** | Point at the score bars → *Select this role* on **QA Automation Associate** | "No black-box score: five visible parts. The onsite Bengaluru role has stronger skills but conflicts with her no-relocation constraint. Gender, age and career break are not inputs." |
@@ -31,3 +32,5 @@ The coloured bar under the top bar always says who you are acting as. Every step
 **Back as Priya:** her passport now shows "Northstar invited you to an interview" with the agreed adjustments.
 
 **Q&A extras:** *Agent activity* shows the hash-chained audit log. `/docs` shows the API. The globe menu switches to Hindi.
+
+**"Does it only work for Priya?" (90 seconds, a strong answer to this question):** *Start over* → *Start with your details*. Type a name, city and languages, pick a work mode, tick *Process my profile* → *Save and continue*. On the evidence page choose *Paste text*, paste a few lines of any resume (kind: *Resume*) → *Add* → *Analyse my evidence*. Say: "Nothing here is pre-loaded. The skills are read from what was just pasted, each with its quote. Skills that are only in a resume stay *Claimed*; add a project or work sample and they become *Backed by documents*. Roles, learning steps, the employer check and the fairness twins all follow this person."

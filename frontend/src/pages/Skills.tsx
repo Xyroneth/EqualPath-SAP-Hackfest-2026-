@@ -61,6 +61,7 @@ export default function Skills() {
               <Chip tone="warn" icon="alert">{t('skills.claimed', { n: selfDeclared.length })}</Chip>
               <InfoTip><b>{t('skills.info_title')}</b><p>{t('skills.info')}</p></InfoTip>
             </div>
+            {skills.length === 0 && <Note tone="warn" testId="no-skills">{t('skills.none')}</Note>}
             {selfDeclared.length > 0 && (
               <Note tone="warn" testId="self-declared-note">
                 <b>{selfDeclared.map((s) => capName(i18n, s.normalized_skill, s.skill_name)).join(', ')}</b> — {t('skills.claimed_note')}

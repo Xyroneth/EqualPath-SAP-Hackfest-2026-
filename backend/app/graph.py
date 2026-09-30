@@ -18,7 +18,7 @@ from langgraph.graph import END, START, StateGraph
 from langgraph.types import RetryPolicy, interrupt
 
 from app.agents.bias_audit import run_bias_audit
-from app.agents.common import employer_for, improved_job_for, job_by_id, role_by_id
+from app.agents.common import employer_for, improved_job_for, job_by_id, match_taxonomy, role_by_id, taxonomy
 from app.agents.employer_readiness import assess_employer
 from app.agents.inclusive_matching import assess_match
 from app.agents.learning_pathway import build_pathway
@@ -168,7 +168,7 @@ def skills_discovery(state: CareerState) -> dict:
                   "inputs": {"documents": result["documents_processed"], "redacted_identifiers": sum(result["redaction"].values())},
                   "outputs": {"skills": len(result["skills"]), "source_supported": result["source_supported_count"], "self_declared": len(self_declared),
                               "self_declared_names": self_declared, "rejected": len(result["rejected"]), "fallback": result["fallback_reason"]},
-                  "message": "Profile ready for Priya's review. Self-declared claims stay unverified until evidence is reviewed."},
+                  "message": "Profile ready for the candidate's review. Self-declared claims stay unverified until evidence is reviewed."},
     }
 
 
@@ -208,9 +208,14 @@ def candidate_review(state: CareerState) -> dict:
                           summary=f"Candidate {PAST_TENSE[d['action']]} skill '{s['skill_name']}'",
                           details={"skill": d["normalized_skill"], "action": d["action"], "reason": d.get("reason")})
     for a in body.get("added_skills", []):
-        key = a["normalized_skill"].strip().lower().replace(" ", "_")
+        # A skill typed by the candidate is matched to the catalog when possible, so it counts towards role requirements (as a claim).
+        known = match_taxonomy(a["skill_name"]) or match_taxonomy(a["normalized_skill"])
+        key = known or a["normalized_skill"].strip().lower().replace(" ", "_")
+        if key in skills and skills[key].get("candidate_action") != "removed":
+            continue  # already found in the evidence; the evidence-based record stays
         skills[key] = {
-            "skill_name": a["skill_name"], "normalized_skill": key, "category": "technical", "proficiency": a.get("proficiency", "basic"),
+            "skill_name": taxonomy()[known]["skill_name"] if known else a["skill_name"], "normalized_skill": key,
+            "category": taxonomy()[known]["category"] if known else "technical", "proficiency": a.get("proficiency", "basic"),
             "evidence_type": "candidate_added", "evidence_quote": a["evidence_quote"], "source_id": a.get("source_id", "candidate-correction"),
             "recency": utcnow()[:7], "confidence": 1.0, "verification_status": "self_declared", "adjacent_skills": [],
             "additional_sources": [], "claimed_proficiency": a.get("proficiency", "basic"), "extraction_method": "candidate",
@@ -248,7 +253,7 @@ def market_intelligence(state: CareerState) -> dict:
         "_meta": {"summary": f"Ranked {len(ranking['top_roles']) + len(ranking['other_roles'])} catalog roles; recommended {rec['title']}.",
                   "confidence": rec["total"], "inputs": {"features_used": ranking["features_used"]},
                   "outputs": {"ranked": len(ranking["top_roles"]) + len(ranking["other_roles"]), "recommended": rec["title"], "recommended_id": rec["role_id"], "top_roles": [r["title"] for r in ranking["top_roles"]]},
-                  "message": "Three role options sent to Priya; protected attributes were not inputs."},
+                  "message": "Three role options sent to the candidate; protected attributes were not inputs."},
     }
 
 

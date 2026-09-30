@@ -10,21 +10,21 @@ import { useApp } from '../state';
 export default function Landing() {
   const { t } = useI18n();
   const nav = useNavigate();
-  const { role, switchRole, startDemo, candidateId, run } = useApp();
-  const [busy, setBusy] = useState(false);
+  const { role, switchRole, startOwn, startSample, candidateId, run } = useApp();
+  const [busy, setBusy] = useState<'own' | 'sample' | null>(null);
   const [err, setErr] = useState<string | null>(null);
 
-  const start = async () => {
-    setBusy(true);
+  const start = async (kind: 'own' | 'sample') => {
+    setBusy(kind);
     setErr(null);
     try {
       await switchRole('candidate');
-      await startDemo();
+      await (kind === 'own' ? startOwn() : startSample());
       nav('/profile');
     } catch (e: any) {
       setErr(e.message);
     } finally {
-      setBusy(false);
+      setBusy(null);
     }
   };
   const steps = [
@@ -42,7 +42,7 @@ export default function Landing() {
           <div className="hero-actions">
             {role === 'candidate' ? (
               <>
-                <Cta onClick={start} loading={busy} testId="start-demo">{t('home.start')}</Cta>
+                <Cta onClick={() => start('own')} loading={busy === 'own'} disabled={!!busy} testId="start-own">{t('home.start')}</Cta>
                 {candidateId && <Cta variant="ghost" onClick={() => nav(run ? '/working' : '/evidence')}>{t('home.continue')}</Cta>}
               </>
             ) : (
@@ -73,13 +73,15 @@ export default function Landing() {
         </div>
       </section>
 
-      <section className="persona-strip card">
+      <section className="persona-strip sample-strip card" aria-labelledby="sample-h">
         <Avatar size={72} />
         <div className="persona-text">
+          <em id="sample-h">{t('home.sample_title')}</em>
           <b>Priya Sharma · 31</b>
           <span>{t('home.persona')}</span>
         </div>
         <Chip tone="warn" icon="hint">{t('home.fictional')}</Chip>
+        {role === 'candidate' && <Cta variant="soft" onClick={() => start('sample')} loading={busy === 'sample'} disabled={!!busy} testId="start-demo">{t('home.start_sample')}</Cta>}
       </section>
     </div>
   );

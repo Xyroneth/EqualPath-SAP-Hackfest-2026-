@@ -1,188 +1,492 @@
 {
-  "_data_label": "CURATED LEARNING CATALOG. Links are deep links to public landing pages. No SAP Learning Hub API, scraping or progress sync is used.",
-  "_verification_process": "link_check = automated HTTP check of the public landing page. team_verified_on = date a team member opened the asset in their SAP Learning Hub, student edition account and confirmed it. Fill team_verified_on before the final demo (see README > SAP Learning Hub).",
-  "assets": [
-    {
-      "asset_id": "sap-btp-exploring",
-      "title": "Exploring SAP Business Technology Platform",
-      "provider": "SAP Learning",
-      "catalog": "SAP Learning Hub, student edition / learning.sap.com",
-      "capability_tags": ["enterprise_apps.sap_context"],
-      "level": "beginner",
-      "estimated_hours": 4,
-      "effort_basis": "team estimate for the modules used in the milestone",
-      "url": "https://learning.sap.com/courses/exploring-sap-business-technology-platform",
-      "student_edition_login_required": false,
-      "link_check": {"date": "2026-09-29", "method": "automated HTTP 200 check", "http_status": 200},
-      "team_verified_on": null
-    },
-    {
-      "asset_id": "sap-build-develop-automate",
-      "title": "Develop and automate with SAP Build",
-      "provider": "SAP Learning",
-      "catalog": "SAP Learning Hub, student edition / learning.sap.com",
-      "capability_tags": ["enterprise_apps.sap_context", "low_code.sap_build"],
-      "level": "beginner",
-      "estimated_hours": 3,
-      "effort_basis": "team estimate for the introductory units",
-      "url": "https://learning.sap.com/courses/develop-and-automate-with-sap-build",
-      "student_edition_login_required": false,
-      "link_check": {"date": "2026-09-29", "method": "automated HTTP 200 check", "http_status": 200},
-      "team_verified_on": null
-    },
-    {
-      "asset_id": "sap-build-journey",
-      "title": "Developing with SAP Build - From Apps to Automation",
-      "provider": "SAP Learning",
-      "catalog": "SAP Learning Hub, student edition / learning.sap.com",
-      "capability_tags": ["enterprise_apps.sap_context", "low_code.sap_build"],
-      "level": "beginner",
-      "estimated_hours": 6,
-      "effort_basis": "team estimate",
-      "url": "https://learning.sap.com/learning-journeys/developing-with-sap-build-from-apps-to-automation",
-      "student_edition_login_required": false,
-      "link_check": {"date": "2026-09-29", "method": "automated HTTP 200 check", "http_status": 200},
-      "team_verified_on": null
-    },
-    {
-      "asset_id": "sap-build-apps-extensions",
-      "title": "Develop extensions using SAP Build Apps",
-      "provider": "SAP Learning",
-      "catalog": "SAP Learning Hub, student edition / learning.sap.com",
-      "capability_tags": ["low_code.sap_build"],
-      "level": "beginner",
-      "estimated_hours": 4,
-      "effort_basis": "team estimate",
-      "url": "https://learning.sap.com/courses/develop-extensions-using-sap-build-apps",
-      "student_edition_login_required": false,
-      "link_check": {"date": "2026-09-29", "method": "automated HTTP 200 check", "http_status": 200},
-      "team_verified_on": null
-    },
-    {
-      "asset_id": "sap-cloud-alm-intro",
-      "title": "Introducing SAP Cloud ALM",
-      "provider": "SAP Learning",
-      "catalog": "SAP Learning Hub, student edition / learning.sap.com",
-      "capability_tags": ["enterprise_apps.sap_context", "test_management.alm"],
-      "level": "beginner",
-      "estimated_hours": 3,
-      "effort_basis": "team estimate for the test-management related units",
-      "url": "https://learning.sap.com/courses/introducing-sap-cloud-alm",
-      "student_edition_login_required": false,
-      "link_check": {"date": "2026-09-29", "method": "automated HTTP 200 check", "http_status": 200},
-      "team_verified_on": null
-    },
-    {
-      "asset_id": "sap-spa-first-process",
-      "title": "Build Your First Business Process with SAP Build Process Automation",
-      "provider": "SAP Developers (tutorial mission)",
-      "catalog": "SAP Developer Center tutorials (public)",
-      "capability_tags": ["low_code.sap_build", "enterprise_apps.sap_context"],
-      "level": "beginner",
-      "estimated_hours": 3,
-      "effort_basis": "team estimate",
-      "url": "https://developers.sap.com/mission.sap-process-automation.html",
-      "student_edition_login_required": false,
-      "link_check": {"date": "2026-09-29", "method": "automated HTTP 200 check", "http_status": 200},
-      "team_verified_on": null
-    },
-    {
-      "asset_id": "sap-hana-cloud-jumpstart",
-      "title": "Jump Start Your SAP HANA Cloud, SAP HANA Database",
-      "provider": "SAP Developers (tutorial mission)",
-      "catalog": "SAP Developer Center tutorials (public)",
-      "capability_tags": ["data.sql"],
-      "level": "beginner",
-      "estimated_hours": 3,
-      "effort_basis": "team estimate",
-      "url": "https://developers.sap.com/mission.hana-cloud-database-get-started.html",
-      "student_edition_login_required": false,
-      "link_check": {"date": "2026-09-29", "method": "automated HTTP 200 check", "http_status": 200},
-      "team_verified_on": null
-    },
-    {
-      "asset_id": "sap-llm-fundamentals",
-      "title": "Navigating Large Language Models: Fundamentals and Techniques for your Use Case",
-      "provider": "SAP Learning",
-      "catalog": "SAP Learning Hub, student edition / learning.sap.com",
-      "capability_tags": ["ai_literacy"],
-      "level": "beginner",
-      "estimated_hours": 4,
-      "effort_basis": "team estimate",
-      "url": "https://learning.sap.com/learning-journeys/navigating-large-language-models-fundamentals-and-techniques-for-your-use-case",
-      "student_edition_login_required": false,
-      "link_check": {"date": "2026-09-29", "method": "automated HTTP 200 check", "http_status": 200},
-      "team_verified_on": null
-    },
-    {
-      "asset_id": "sap-learning-hub-student",
-      "title": "SAP Learning Hub, student edition (portal)",
-      "provider": "SAP Learning Hub",
-      "catalog": "SAP Learning Hub, student edition",
-      "capability_tags": ["enterprise_apps.sap_context"],
-      "level": "beginner",
-      "estimated_hours": 1,
-      "effort_basis": "orientation only",
-      "url": "https://learninghub.sap.com",
-      "student_edition_login_required": true,
-      "link_check": {"date": "2026-09-29", "method": "automated HTTP 200 check", "http_status": 200},
-      "team_verified_on": null
-    },
-    {
-      "asset_id": "ext-playwright-python",
-      "title": "Playwright for Python - Getting started",
-      "provider": "External open resource (not SAP)",
-      "catalog": "Public documentation",
-      "capability_tags": ["test_automation.browser"],
-      "level": "beginner",
-      "estimated_hours": 4,
-      "effort_basis": "team estimate",
-      "url": "https://playwright.dev/python/docs/intro",
-      "student_edition_login_required": false,
-      "link_check": {"date": "2026-09-29", "method": "automated HTTP 200 check", "http_status": 200},
-      "team_verified_on": null
-    },
-    {
-      "asset_id": "ext-selenium-getting-started",
-      "title": "Selenium WebDriver - Getting started",
-      "provider": "External open resource (not SAP)",
-      "catalog": "Public documentation",
-      "capability_tags": ["test_automation.browser"],
-      "level": "beginner",
-      "estimated_hours": 4,
-      "effort_basis": "team estimate",
-      "url": "https://www.selenium.dev/documentation/webdriver/getting_started/",
-      "student_edition_login_required": false,
-      "link_check": {"date": "2026-09-29", "method": "automated HTTP 200 check", "http_status": 200},
-      "team_verified_on": null
-    },
-    {
-      "asset_id": "ext-postman-api-testing",
-      "title": "Postman - Getting started with API requests and tests",
-      "provider": "External open resource (not SAP)",
-      "catalog": "Public documentation",
-      "capability_tags": ["api_testing"],
-      "level": "beginner",
-      "estimated_hours": 3,
-      "effort_basis": "team estimate",
-      "url": "https://learning.postman.com/docs/getting-started/overview/",
-      "student_edition_login_required": false,
-      "link_check": {"date": "2026-09-29", "method": "automated HTTP 200 check", "http_status": 200},
-      "team_verified_on": null
-    },
-    {
-      "asset_id": "ext-github-hello-world",
-      "title": "GitHub - Hello World",
-      "provider": "External open resource (not SAP)",
-      "catalog": "Public documentation",
-      "capability_tags": ["version_control.git"],
-      "level": "beginner",
-      "estimated_hours": 1,
-      "effort_basis": "team estimate",
-      "url": "https://docs.github.com/en/get-started/start-your-journey/hello-world",
-      "student_edition_login_required": false,
-      "link_check": {"date": "2026-09-29", "method": "automated HTTP 200 check", "http_status": 200},
-      "team_verified_on": null
-    }
-  ]
+ "_data_label": "CURATED LEARNING CATALOG. Links are deep links to public landing pages. No SAP Learning Hub API, scraping or progress sync is used.",
+ "_verification_process": "link_check = automated HTTP check of the public landing page. team_verified_on = date a team member opened the asset in their SAP Learning Hub, student edition account and confirmed it. Fill team_verified_on before the final demo (see README > SAP Learning Hub).",
+ "assets": [
+  {
+   "asset_id": "sap-btp-exploring",
+   "title": "Exploring SAP Business Technology Platform",
+   "provider": "SAP Learning",
+   "catalog": "SAP Learning Hub, student edition / learning.sap.com",
+   "capability_tags": [
+    "enterprise_apps.sap_context"
+   ],
+   "level": "beginner",
+   "estimated_hours": 4,
+   "effort_basis": "team estimate for the modules used in the milestone",
+   "url": "https://learning.sap.com/courses/exploring-sap-business-technology-platform",
+   "student_edition_login_required": false,
+   "link_check": {
+    "date": "2026-09-29",
+    "method": "automated HTTP 200 check",
+    "http_status": 200
+   },
+   "team_verified_on": null
+  },
+  {
+   "asset_id": "sap-build-develop-automate",
+   "title": "Develop and automate with SAP Build",
+   "provider": "SAP Learning",
+   "catalog": "SAP Learning Hub, student edition / learning.sap.com",
+   "capability_tags": [
+    "enterprise_apps.sap_context",
+    "low_code.sap_build"
+   ],
+   "level": "beginner",
+   "estimated_hours": 3,
+   "effort_basis": "team estimate for the introductory units",
+   "url": "https://learning.sap.com/courses/develop-and-automate-with-sap-build",
+   "student_edition_login_required": false,
+   "link_check": {
+    "date": "2026-09-29",
+    "method": "automated HTTP 200 check",
+    "http_status": 200
+   },
+   "team_verified_on": null
+  },
+  {
+   "asset_id": "sap-build-journey",
+   "title": "Developing with SAP Build - From Apps to Automation",
+   "provider": "SAP Learning",
+   "catalog": "SAP Learning Hub, student edition / learning.sap.com",
+   "capability_tags": [
+    "enterprise_apps.sap_context",
+    "low_code.sap_build"
+   ],
+   "level": "beginner",
+   "estimated_hours": 6,
+   "effort_basis": "team estimate",
+   "url": "https://learning.sap.com/learning-journeys/developing-with-sap-build-from-apps-to-automation",
+   "student_edition_login_required": false,
+   "link_check": {
+    "date": "2026-09-29",
+    "method": "automated HTTP 200 check",
+    "http_status": 200
+   },
+   "team_verified_on": null
+  },
+  {
+   "asset_id": "sap-build-apps-extensions",
+   "title": "Develop extensions using SAP Build Apps",
+   "provider": "SAP Learning",
+   "catalog": "SAP Learning Hub, student edition / learning.sap.com",
+   "capability_tags": [
+    "low_code.sap_build"
+   ],
+   "level": "beginner",
+   "estimated_hours": 4,
+   "effort_basis": "team estimate",
+   "url": "https://learning.sap.com/courses/develop-extensions-using-sap-build-apps",
+   "student_edition_login_required": false,
+   "link_check": {
+    "date": "2026-09-29",
+    "method": "automated HTTP 200 check",
+    "http_status": 200
+   },
+   "team_verified_on": null
+  },
+  {
+   "asset_id": "sap-cloud-alm-intro",
+   "title": "Introducing SAP Cloud ALM",
+   "provider": "SAP Learning",
+   "catalog": "SAP Learning Hub, student edition / learning.sap.com",
+   "capability_tags": [
+    "enterprise_apps.sap_context",
+    "test_management.alm"
+   ],
+   "level": "beginner",
+   "estimated_hours": 3,
+   "effort_basis": "team estimate for the test-management related units",
+   "url": "https://learning.sap.com/courses/introducing-sap-cloud-alm",
+   "student_edition_login_required": false,
+   "link_check": {
+    "date": "2026-09-29",
+    "method": "automated HTTP 200 check",
+    "http_status": 200
+   },
+   "team_verified_on": null
+  },
+  {
+   "asset_id": "sap-spa-first-process",
+   "title": "Build Your First Business Process with SAP Build Process Automation",
+   "provider": "SAP Developers (tutorial mission)",
+   "catalog": "SAP Developer Center tutorials (public)",
+   "capability_tags": [
+    "low_code.sap_build",
+    "enterprise_apps.sap_context"
+   ],
+   "level": "beginner",
+   "estimated_hours": 3,
+   "effort_basis": "team estimate",
+   "url": "https://developers.sap.com/mission.sap-process-automation.html",
+   "student_edition_login_required": false,
+   "link_check": {
+    "date": "2026-09-29",
+    "method": "automated HTTP 200 check",
+    "http_status": 200
+   },
+   "team_verified_on": null
+  },
+  {
+   "asset_id": "sap-hana-cloud-jumpstart",
+   "title": "Jump Start Your SAP HANA Cloud, SAP HANA Database",
+   "provider": "SAP Developers (tutorial mission)",
+   "catalog": "SAP Developer Center tutorials (public)",
+   "capability_tags": [
+    "data.sql"
+   ],
+   "level": "beginner",
+   "estimated_hours": 3,
+   "effort_basis": "team estimate",
+   "url": "https://developers.sap.com/mission.hana-cloud-database-get-started.html",
+   "student_edition_login_required": false,
+   "link_check": {
+    "date": "2026-09-29",
+    "method": "automated HTTP 200 check",
+    "http_status": 200
+   },
+   "team_verified_on": null
+  },
+  {
+   "asset_id": "sap-llm-fundamentals",
+   "title": "Navigating Large Language Models: Fundamentals and Techniques for your Use Case",
+   "provider": "SAP Learning",
+   "catalog": "SAP Learning Hub, student edition / learning.sap.com",
+   "capability_tags": [
+    "ai_literacy"
+   ],
+   "level": "beginner",
+   "estimated_hours": 4,
+   "effort_basis": "team estimate",
+   "url": "https://learning.sap.com/learning-journeys/navigating-large-language-models-fundamentals-and-techniques-for-your-use-case",
+   "student_edition_login_required": false,
+   "link_check": {
+    "date": "2026-09-29",
+    "method": "automated HTTP 200 check",
+    "http_status": 200
+   },
+   "team_verified_on": null
+  },
+  {
+   "asset_id": "sap-learning-hub-student",
+   "title": "SAP Learning Hub, student edition (portal)",
+   "provider": "SAP Learning Hub",
+   "catalog": "SAP Learning Hub, student edition",
+   "capability_tags": [
+    "enterprise_apps.sap_context"
+   ],
+   "level": "beginner",
+   "estimated_hours": 1,
+   "effort_basis": "orientation only",
+   "url": "https://learninghub.sap.com",
+   "student_edition_login_required": true,
+   "link_check": {
+    "date": "2026-09-29",
+    "method": "automated HTTP 200 check",
+    "http_status": 200
+   },
+   "team_verified_on": null
+  },
+  {
+   "asset_id": "ext-playwright-python",
+   "title": "Playwright for Python - Getting started",
+   "provider": "External open resource (not SAP)",
+   "catalog": "Public documentation",
+   "capability_tags": [
+    "test_automation.browser"
+   ],
+   "level": "beginner",
+   "estimated_hours": 4,
+   "effort_basis": "team estimate",
+   "url": "https://playwright.dev/python/docs/intro",
+   "student_edition_login_required": false,
+   "link_check": {
+    "date": "2026-09-29",
+    "method": "automated HTTP 200 check",
+    "http_status": 200
+   },
+   "team_verified_on": null
+  },
+  {
+   "asset_id": "ext-selenium-getting-started",
+   "title": "Selenium WebDriver - Getting started",
+   "provider": "External open resource (not SAP)",
+   "catalog": "Public documentation",
+   "capability_tags": [
+    "test_automation.browser"
+   ],
+   "level": "beginner",
+   "estimated_hours": 4,
+   "effort_basis": "team estimate",
+   "url": "https://www.selenium.dev/documentation/webdriver/getting_started/",
+   "student_edition_login_required": false,
+   "link_check": {
+    "date": "2026-09-29",
+    "method": "automated HTTP 200 check",
+    "http_status": 200
+   },
+   "team_verified_on": null
+  },
+  {
+   "asset_id": "ext-postman-api-testing",
+   "title": "Postman - Getting started with API requests and tests",
+   "provider": "External open resource (not SAP)",
+   "catalog": "Public documentation",
+   "capability_tags": [
+    "api_testing"
+   ],
+   "level": "beginner",
+   "estimated_hours": 3,
+   "effort_basis": "team estimate",
+   "url": "https://learning.postman.com/docs/getting-started/overview/",
+   "student_edition_login_required": false,
+   "link_check": {
+    "date": "2026-09-29",
+    "method": "automated HTTP 200 check",
+    "http_status": 200
+   },
+   "team_verified_on": null
+  },
+  {
+   "asset_id": "ext-github-hello-world",
+   "title": "GitHub - Hello World",
+   "provider": "External open resource (not SAP)",
+   "catalog": "Public documentation",
+   "capability_tags": [
+    "version_control.git"
+   ],
+   "level": "beginner",
+   "estimated_hours": 1,
+   "effort_basis": "team estimate",
+   "url": "https://docs.github.com/en/get-started/start-your-journey/hello-world",
+   "student_edition_login_required": false,
+   "link_check": {
+    "date": "2026-09-29",
+    "method": "automated HTTP 200 check",
+    "http_status": 200
+   },
+   "team_verified_on": null
+  },
+  {
+   "asset_id": "ext-python-tutorial",
+   "title": "The Python Tutorial (python.org)",
+   "provider": "External open resource (not SAP)",
+   "catalog": "Open web resource",
+   "capability_tags": [
+    "programming.python"
+   ],
+   "level": "beginner",
+   "estimated_hours": 6,
+   "effort_basis": "team estimate for the parts used in the milestone",
+   "url": "https://docs.python.org/3/tutorial/",
+   "student_edition_login_required": false,
+   "link_check": {
+    "date": "2026-09-30",
+    "method": "automated HTTP 200 check",
+    "http_status": 200
+   },
+   "team_verified_on": null
+  },
+  {
+   "asset_id": "ext-mdn-javascript",
+   "title": "Dynamic scripting with JavaScript (MDN)",
+   "provider": "External open resource (not SAP)",
+   "catalog": "Open web resource",
+   "capability_tags": [
+    "programming.javascript"
+   ],
+   "level": "beginner",
+   "estimated_hours": 8,
+   "effort_basis": "team estimate for the parts used in the milestone",
+   "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Scripting",
+   "student_edition_login_required": false,
+   "link_check": {
+    "date": "2026-09-30",
+    "method": "automated HTTP 200 check",
+    "http_status": 200
+   },
+   "team_verified_on": null
+  },
+  {
+   "asset_id": "ext-react-learn",
+   "title": "Learn React (react.dev)",
+   "provider": "External open resource (not SAP)",
+   "catalog": "Open web resource",
+   "capability_tags": [
+    "frontend.react"
+   ],
+   "level": "beginner",
+   "estimated_hours": 8,
+   "effort_basis": "team estimate for the parts used in the milestone",
+   "url": "https://react.dev/learn",
+   "student_edition_login_required": false,
+   "link_check": {
+    "date": "2026-09-30",
+    "method": "automated HTTP 200 check",
+    "http_status": 200
+   },
+   "team_verified_on": null
+  },
+  {
+   "asset_id": "ext-excel-training",
+   "title": "Excel video training (Microsoft Support)",
+   "provider": "External open resource (not SAP)",
+   "catalog": "Open web resource",
+   "capability_tags": [
+    "data.spreadsheet_analysis"
+   ],
+   "level": "beginner",
+   "estimated_hours": 4,
+   "effort_basis": "team estimate for the parts used in the milestone",
+   "url": "https://support.microsoft.com/en-us/office/excel-video-training-9bc05390-e94c-46af-a5b3-d7c22f6990bb",
+   "student_edition_login_required": false,
+   "link_check": {
+    "date": "2026-09-30",
+    "method": "automated HTTP 200 check",
+    "http_status": 200
+   },
+   "team_verified_on": null
+  },
+  {
+   "asset_id": "ext-openrefine-docs",
+   "title": "OpenRefine user manual: cleaning messy data",
+   "provider": "External open resource (not SAP)",
+   "catalog": "Open web resource",
+   "capability_tags": [
+    "data_quality.profiling"
+   ],
+   "level": "beginner",
+   "estimated_hours": 4,
+   "effort_basis": "team estimate for the parts used in the milestone",
+   "url": "https://openrefine.org/docs",
+   "student_edition_login_required": false,
+   "link_check": {
+    "date": "2026-09-30",
+    "method": "automated HTTP 200 check",
+    "http_status": 200
+   },
+   "team_verified_on": null
+  },
+  {
+   "asset_id": "ext-istqb-foundation",
+   "title": "ISTQB Certified Tester Foundation Level: syllabus and sample exams",
+   "provider": "External open resource (not SAP)",
+   "catalog": "Open web resource",
+   "capability_tags": [
+    "software_testing.manual",
+    "software_testing.test_design",
+    "software_testing.fundamentals"
+   ],
+   "level": "beginner",
+   "estimated_hours": 6,
+   "effort_basis": "team estimate for the parts used in the milestone",
+   "url": "https://www.istqb.org/certifications/certified-tester-foundation-level",
+   "student_edition_login_required": false,
+   "link_check": {
+    "date": "2026-09-30",
+    "method": "automated HTTP 200 check",
+    "http_status": 200
+   },
+   "team_verified_on": null
+  },
+  {
+   "asset_id": "ext-bug-reports",
+   "title": "How to Report Bugs Effectively (Simon Tatham)",
+   "provider": "External open resource (not SAP)",
+   "catalog": "Open web resource",
+   "capability_tags": [
+    "software_testing.defect_management"
+   ],
+   "level": "beginner",
+   "estimated_hours": 1,
+   "effort_basis": "team estimate for the parts used in the milestone",
+   "url": "https://www.chiark.greenend.org.uk/~sgtatham/bugs.html",
+   "student_edition_login_required": false,
+   "link_check": {
+    "date": "2026-09-30",
+    "method": "automated HTTP 200 check",
+    "http_status": 200
+   },
+   "team_verified_on": null
+  },
+  {
+   "asset_id": "ext-jira-issues",
+   "title": "Jira guide: working with issues (Atlassian)",
+   "provider": "External open resource (not SAP)",
+   "catalog": "Open web resource",
+   "capability_tags": [
+    "software_testing.defect_management"
+   ],
+   "level": "beginner",
+   "estimated_hours": 2,
+   "effort_basis": "team estimate for the parts used in the milestone",
+   "url": "https://www.atlassian.com/software/jira/guides/issues/overview",
+   "student_edition_login_required": false,
+   "link_check": {
+    "date": "2026-09-30",
+    "method": "automated HTTP 200 check",
+    "http_status": 200
+   },
+   "team_verified_on": null
+  },
+  {
+   "asset_id": "sap-activate-discovering",
+   "title": "Discovering SAP Activate: Implementation Tools and Methodology",
+   "provider": "SAP Learning",
+   "catalog": "SAP Learning Hub, student edition / learning.sap.com",
+   "capability_tags": [
+    "collaboration.agile"
+   ],
+   "level": "beginner",
+   "estimated_hours": 4,
+   "effort_basis": "team estimate for the parts used in the milestone",
+   "url": "https://learning.sap.com/courses/discovering-sap-activate-implementation-tools-and-methodology",
+   "student_edition_login_required": false,
+   "link_check": {
+    "date": "2026-09-30",
+    "method": "automated HTTP 200 check",
+    "http_status": 200
+   },
+   "team_verified_on": null
+  },
+  {
+   "asset_id": "ext-scrum-guide",
+   "title": "The Scrum Guide",
+   "provider": "External open resource (not SAP)",
+   "catalog": "Open web resource",
+   "capability_tags": [
+    "collaboration.agile"
+   ],
+   "level": "beginner",
+   "estimated_hours": 2,
+   "effort_basis": "team estimate for the parts used in the milestone",
+   "url": "https://scrumguides.org/scrum-guide.html",
+   "student_edition_login_required": false,
+   "link_check": {
+    "date": "2026-09-30",
+    "method": "automated HTTP 200 check",
+    "http_status": 200
+   },
+   "team_verified_on": null
+  },
+  {
+   "asset_id": "ext-tech-writing",
+   "title": "Technical Writing One (Google)",
+   "provider": "External open resource (not SAP)",
+   "catalog": "Open web resource",
+   "capability_tags": [
+    "communication.bilingual"
+   ],
+   "level": "beginner",
+   "estimated_hours": 3,
+   "effort_basis": "team estimate for the parts used in the milestone",
+   "url": "https://developers.google.com/tech-writing/one",
+   "student_edition_login_required": false,
+   "link_check": {
+    "date": "2026-09-30",
+    "method": "automated HTTP 200 check",
+    "http_status": 200
+   },
+   "team_verified_on": null
+  }
+ ]
 }

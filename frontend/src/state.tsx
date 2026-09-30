@@ -34,7 +34,11 @@ interface AppState {
   journey: Journey;
   visited: string[];
   markVisited: (route: string) => void;
-  startDemo: () => Promise<void>;
+  /** Start with an empty profile: the person enters their own (or someone else's) details and evidence. */
+  startOwn: () => Promise<void>;
+  /** Start with the optional fictional sample profile and its six sample documents. */
+  startSample: () => Promise<void>;
+  isSample: boolean;
   saveProfile: () => Promise<string>;
   startRun: () => Promise<string>;
   setActiveRun: (runId: string, candidateId: string) => void;
@@ -75,6 +79,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [consent, setConsent] = useState<any>(DEFAULT_CONSENT);
   const [candidateId, setCandidateId] = useState<string | null>(store.get('candidateId'));
   const [docs, setDocs] = useState<any[]>([]);
+  const [isSample, setIsSample] = useState<boolean>(store.get('sample') === '1');
   const [runId, setRunId] = useState<string | null>(store.get('runId'));
   const [run, setRun] = useState<any>(null);
   const [visited, setVisited] = useState<string[]>([]);
@@ -215,9 +220,10 @@ export function AppProvider({ children }: { children: ReactNode }) {
   }, [runId]);
 
   // ---- demo flow actions (all as the open Candidate role)
-  const startDemo = async () => {
-    const persona = await api.get('/api/demo/persona');
-    setProfile(persona.profile);
+  const begin = (p: any, sample: boolean) => {
+    setProfile(p);
+    setIsSample(sample);
+    store.set('sample', sample ? '1' : null);
     setConsent(DEFAULT_CONSENT);
     setCandidateId(null);
     setRunId(null);
@@ -226,12 +232,14 @@ export function AppProvider({ children }: { children: ReactNode }) {
     store.set('candidateId', null);
     store.set('runId', null);
   };
+  const startOwn = async () => begin((await api.get('/api/profile/blank')).profile, false);
+  const startSample = async () => begin((await api.get('/api/demo/persona')).profile, true);
   const saveProfile = async () => {
     if (candidateId) {
       await api.put(`/api/candidates/${candidateId}`, { profile, consent });
       return candidateId;
     }
-    const { candidate_id } = await api.post('/api/candidates', { profile, consent, seed_persona: 'priya' });
+    const { candidate_id } = await api.post('/api/candidates', { profile, consent, seed_persona: isSample ? 'priya' : null });
     setCandidateId(candidate_id);
     store.set('candidateId', candidate_id);
     return candidate_id;
@@ -257,6 +265,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
     setRun(null);
     setProfile(null);
     setDocs([]);
+    setIsSample(false);
+    store.set('sample', null);
     setConsent(DEFAULT_CONSENT);
     store.set('runId', null);
     store.set('candidateId', null);
@@ -267,7 +277,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
   return (
     <Ctx.Provider value={{ role, unlocked, switchRole, signOut, loginDialog, askLogin, theme, toggleTheme, system, profile, setProfile, consent, setConsent, candidateId, docs, refreshDocs,
-      runId, run, refresh, journey, visited, markVisited, startDemo, saveProfile, startRun, setActiveRun, resetDemo, toasts, toast, dismissToast }}>
+      runId, run, refresh, journey, visited, markVisited, startOwn, startSample, isSample, saveProfile, startRun, setActiveRun, resetDemo, toasts, toast, dismissToast }}>
       {children}
     </Ctx.Provider>
   );

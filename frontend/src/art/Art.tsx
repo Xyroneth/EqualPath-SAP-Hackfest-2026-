@@ -70,7 +70,7 @@ export function HeroArt() {
 
 export function EmptyArt({ kind = 'analysis' }: { kind?: 'analysis' | 'locked' | 'waiting' | 'evidence' }) {
   return (
-    <svg viewBox="0 0 240 170" className="art empty-art" role="img" aria-hidden="true">
+    <svg viewBox="0 0 240 170" className="art empty-art" aria-hidden="true">
       <ellipse cx="120" cy="150" rx="80" ry="10" fill="var(--art-blob)" opacity=".5" />
       {kind === 'locked' && (
         <g>
@@ -112,7 +112,7 @@ export function EmptyArt({ kind = 'analysis' }: { kind?: 'analysis' | 'locked' |
 
 export function Avatar({ size = 64 }: { size?: number }) {
   return (
-    <svg viewBox="0 0 96 96" width={size} height={size} className="avatar" role="img" aria-label="Priya">
+    <svg viewBox="0 0 96 96" width={size} height={size} className="avatar" aria-hidden="true">
       <circle cx="48" cy="48" r="48" fill="var(--teal-soft)" />
       <clipPath id="avc"><circle cx="48" cy="48" r="48" /></clipPath>
       <g clipPath="url(#avc)">

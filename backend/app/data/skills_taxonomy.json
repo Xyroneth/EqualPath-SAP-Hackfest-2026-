@@ -1,5 +1,5 @@
 {
-  "_data_label": "Locally seeded capability taxonomy used by the Skills Discovery and Learning Pathway agents.",
+  "_data_label": "Locally seeded capability taxonomy used by the Skills Discovery and Learning Pathway agents. The wording patterns cover ordinary resumes and work samples, not one person.",
   "skills": [
     {
       "normalized_skill": "software_testing.manual",
@@ -12,7 +12,17 @@
         "executed \\d+",
         "tested the",
         "verified by tester",
-        "retested after fixes"
+        "retested after fixes",
+        "manual test",
+        "functional testing",
+        "regression testing",
+        "test execution",
+        "user acceptance test",
+        "\\buat\\b",
+        "software tester",
+        "qa tester",
+        "qa engineer",
+        "quality assurance"
       ],
       "adjacent_skills": [
         "test automation",
@@ -27,7 +37,11 @@
         "boundary value",
         "equivalence partitioning",
         "test case design",
-        "preconditions"
+        "preconditions",
+        "test cases?",
+        "test scenarios?",
+        "test plans?",
+        "decision table"
       ],
       "adjacent_skills": [
         "test automation",
@@ -45,11 +59,20 @@
         "logged and tracked defects",
         "defect reporting",
         "verified the fix",
-        "verified fixes"
+        "verified fixes",
+        "bug reports?",
+        "\\bbugs\\b",
+        "\\bdefects\\b",
+        "\\bjira\\b",
+        "bugzilla",
+        "bug tracking",
+        "issue tracking",
+        "root[- ]cause"
       ],
       "adjacent_skills": [
         "root-cause analysis",
-        "test management tools"
+        "test management tools",
+        "ticket handling and user support"
       ]
     },
     {
@@ -61,7 +84,11 @@
         "playwright",
         "cypress",
         "webdriver",
-        "browser automation"
+        "browser automation",
+        "automated (?:ui |browser |regression |web )?tests?",
+        "automation scripts?",
+        "test automation (?:framework|scripts?|suite)s?",
+        "automated test scripts?"
       ],
       "adjacent_skills": [
         "python scripting",
@@ -77,7 +104,11 @@
         "python \\(",
         "\\.py:",
         "pytest",
-        "python practice"
+        "python practice",
+        "\\bdjango\\b",
+        "\\bflask\\b",
+        "\\bpandas\\b",
+        "\\bpython\\b(?! scripts| \\(| practice)"
       ],
       "adjacent_skills": [
         "test automation",
@@ -86,12 +117,16 @@
     },
     {
       "normalized_skill": "testing.unit_testing",
-      "skill_name": "Unit testing with pytest",
+      "skill_name": "Unit testing",
       "category": "technical",
       "patterns": [
         "unit tests",
         "pytest",
-        "parametrized tests"
+        "parametrized tests",
+        "unit test",
+        "\\bjunit\\b",
+        "\\bjest\\b",
+        "test-driven"
       ],
       "adjacent_skills": [
         "test automation",
@@ -106,7 +141,13 @@
         "commits",
         "pull requests",
         "feature branches",
-        "git and github"
+        "git and github",
+        "\\bgit\\b",
+        "github",
+        "gitlab",
+        "bitbucket",
+        "version control",
+        "merge requests?"
       ],
       "adjacent_skills": [
         "ci pipelines",
@@ -122,7 +163,11 @@
         "postman",
         "rest api",
         "status code",
-        "json response"
+        "json response",
+        "api testing",
+        "swagger",
+        "api endpoints?",
+        "status codes?"
       ],
       "adjacent_skills": [
         "integration testing",
@@ -131,12 +176,16 @@
     },
     {
       "normalized_skill": "data.sql",
-      "skill_name": "SQL for test data",
+      "skill_name": "SQL",
       "category": "technical",
       "patterns": [
         "sql",
         "select \\*",
-        "database quer"
+        "database quer",
+        "mysql",
+        "postgres",
+        "sql server",
+        "oracle database"
       ],
       "adjacent_skills": [
         "data validation"
@@ -152,11 +201,18 @@
         "summary tables",
         "\\bcharts?\\b",
         "workbook",
-        "ms excel"
+        "ms excel",
+        "\\bexcel\\b",
+        "vlookup",
+        "xlookup",
+        "google sheets",
+        "spreadsheets?",
+        "\\bpivot\\b"
       ],
       "adjacent_skills": [
         "reporting",
-        "data quality"
+        "data quality",
+        "data quality checks"
       ]
     },
     {
@@ -169,7 +225,10 @@
         "s/4hana",
         "sap fiori",
         "cloud alm",
-        "enterprise application"
+        "enterprise application",
+        "\\bsap (?:erp|mm|sd|fico|hana|abap|fiori|btp|build|successfactors|ariba|basis|s/4|system|modules?)",
+        "\\babap\\b",
+        "\\berp\\b"
       ],
       "adjacent_skills": [
         "business process testing",
@@ -184,7 +243,11 @@
         "scrum",
         "stand-ups",
         "sprint",
-        "triage decisions agreed"
+        "triage decisions agreed",
+        "\\bagile\\b",
+        "kanban",
+        "retrospectives?",
+        "stand-?ups?"
       ],
       "adjacent_skills": [
         "stakeholder communication"
@@ -192,12 +255,18 @@
     },
     {
       "normalized_skill": "communication.bilingual",
-      "skill_name": "Bilingual communication (Hindi, English)",
+      "skill_name": "Communication in more than one language",
       "category": "professional",
       "patterns": [
         "hindi \\(native\\)",
         "english \\(professional\\)",
-        "languages:"
+        "languages:",
+        "bilingual",
+        "multilingual",
+        "fluent in",
+        "hindi and english",
+        "english and hindi",
+        "languages? known"
       ],
       "adjacent_skills": [
         "customer support",
@@ -206,15 +275,108 @@
     },
     {
       "normalized_skill": "software_testing.fundamentals",
-      "skill_name": "Software testing fundamentals (course)",
+      "skill_name": "Software testing fundamentals",
       "category": "learning",
       "patterns": [
         "software testing fundamentals",
         "defect life cycle",
-        "test levels"
+        "test levels",
+        "istqb",
+        "software testing (?:course|certificate|certification)"
       ],
       "adjacent_skills": [
         "test automation concepts"
+      ]
+    },
+    {
+      "normalized_skill": "programming.javascript",
+      "skill_name": "JavaScript",
+      "category": "technical",
+      "patterns": [
+        "\\bjavascript\\b",
+        "typescript",
+        "\\bes6\\b",
+        "node\\.?js",
+        "\\bjquery\\b"
+      ],
+      "adjacent_skills": [
+        "html and css",
+        "python scripting",
+        "react"
+      ]
+    },
+    {
+      "normalized_skill": "frontend.react",
+      "skill_name": "React",
+      "category": "technical",
+      "patterns": [
+        "react(?:\\.js|js)\\b",
+        "\\breact (?:app|apps|components?|hooks|native|projects?|frontend|developer)",
+        "(?:using|in|with) react\\b",
+        "\\breact,",
+        "\\bjsx\\b",
+        "\\bredux\\b",
+        "next\\.js"
+      ],
+      "adjacent_skills": [
+        "javascript",
+        "html and css"
+      ]
+    },
+    {
+      "normalized_skill": "web.html_css",
+      "skill_name": "HTML and CSS",
+      "category": "technical",
+      "patterns": [
+        "\\bhtml5?\\b",
+        "\\bcss3?\\b",
+        "tailwind",
+        "bootstrap",
+        "responsive (?:design|layouts?|web)"
+      ],
+      "adjacent_skills": [
+        "javascript"
+      ]
+    },
+    {
+      "normalized_skill": "data_quality.profiling",
+      "skill_name": "Data quality checks",
+      "category": "technical",
+      "patterns": [
+        "data quality",
+        "data clean(?:ing|sing)",
+        "data entry",
+        "duplicate (?:records|rows|entries)",
+        "missing values",
+        "data profiling",
+        "data accuracy",
+        "reconcil",
+        "data validation (?:checks|rules)",
+        "validated (?:the )?data"
+      ],
+      "adjacent_skills": [
+        "spreadsheet analysis (excel)",
+        "sql"
+      ]
+    },
+    {
+      "normalized_skill": "support.ticket_handling",
+      "skill_name": "Ticket handling and user support",
+      "category": "professional",
+      "patterns": [
+        "support tickets?",
+        "\\btickets\\b",
+        "help ?desk",
+        "service desk",
+        "customer support",
+        "technical support",
+        "troubleshoot",
+        "servicenow",
+        "zendesk",
+        "freshdesk"
+      ],
+      "adjacent_skills": [
+        "defect reporting and tracking"
       ]
     }
   ]

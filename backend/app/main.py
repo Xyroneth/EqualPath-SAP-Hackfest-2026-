@@ -24,6 +24,7 @@ from app.agents.skills_discovery import discover_skills
 from app.config import get_settings, load_json, running_on_btp
 from app.graph import get_graph
 from app.passport import compose_passport, employer_copy, passport_html
+from app.profile import ProfileError, blank_profile, normalise_profile
 from app.providers.identity import (ROLE_LABELS, Principal, authenticate, current_principal, default_passwords_in_use, get_identity_provider,
                                     require_roles)
 from app.providers.learning_catalog import get_learning_catalog
@@ -151,9 +152,15 @@ def system_status():
 
 # ------------------------------------------------------------------ seed data
 
+@app.get("/api/profile/blank")
+def get_blank_profile():
+    """An empty profile for someone entering their own, or another person's, details."""
+    return {"profile": blank_profile()}
+
+
 @app.get("/api/demo/persona")
 def demo_persona(p: Principal = Depends(require_roles("candidate"))):
-    """The fictional demo persona: only the (open) Candidate role may load it, because it includes her private note."""
+    """The optional fictional sample persona: only the (open) Candidate role may load it, because it includes her private note."""
     persona = load_persona()
     return {"profile": persona["profile"], "documents": [{k: d[k] for k in ("source_id", "title", "evidence_type", "date", "file")} for d in persona["documents"]]}
 
@@ -208,8 +215,11 @@ def _load_file(cid: str, source_id: str) -> tuple[dict, bytes]:
 
 
 def _clean_profile(profile: dict, cid: str) -> dict:
-    """Move the private accommodation note out of the profile into encrypted storage."""
-    profile = copy.deepcopy(profile)
+    """Validate the profile, then move the private accommodation note out of it into encrypted storage."""
+    try:
+        profile = normalise_profile(profile)
+    except ProfileError as e:
+        raise HTTPException(422, str(e)) from e
     acc = profile.get("accommodations") or {}
     if "private_note" in acc:
         note = acc.pop("private_note")
@@ -235,12 +245,12 @@ def create_candidate(body: CreateCandidateBody, p: Principal = Depends(require_r
     if not body.consent.process_profile:
         raise HTTPException(403, "Explicit consent to process the profile is required.")
     cid = f"cand-{uuid.uuid4().hex[:10]}"
+    profile = _clean_profile(body.profile, cid)  # validates first, so nothing is stored for a profile that is refused
     documents = []
-    if body.seed_persona == "priya":
+    if body.seed_persona == "priya":  # optional sample: the fictional persona's evidence files
         for doc, data in seed_files():
             documents.append({**doc, "added_at": utcnow()})
             _store_file(cid, doc["source_id"], doc["filename"], doc["mime"], data)
-    profile = _clean_profile(body.profile, cid)
     get_repository().put("candidates", cid, {"candidate_id": cid, "profile": profile, "documents": documents, "consent": body.consent.model_dump(), "created_at": utcnow()}, owner_id=cid)
     audit(event_type="consent_recorded", actor=_actor(p), run_id=None, candidate_id=cid, summary="Candidate consent recorded", details={"consent": body.consent.model_dump()})
     audit(event_type="profile_created", actor=_actor(p), run_id=None, candidate_id=cid, summary=f"Profile created with {len(documents)} evidence documents",

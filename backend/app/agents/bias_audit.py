@@ -22,29 +22,87 @@ from app.schemas import EvidenceDocument
 
 MATERIAL_SCORE_DELTA = 0.01  # points out of 100
 
-_BREAK_SENTENCE = "Returning to work after a four-year career break (2022-2026) for family caregiving. "
+# Wording from the optional sample persona's documents, reworded when a twin changes that detail (ignored for anyone else).
+_SAMPLE_BREAK_SENTENCE = "Returning to work after a four-year career break (2022-2026) for family caregiving. "
+_SAMPLE_BREAK_PHRASE = "four-year career break (2022-2026)"
+_SAMPLE_EDUCATION = "B.Sc. (Computer Science), 2018"
+_FAMOUS_COLLEGE = re.compile(r"\b(IIT|NIT|BITS)\b", re.I)
 
-# Each twin changes one personal detail (the man twin changes name and gender together, as a real person would differ).
-# "profile" edits the structured profile; "text" edits the documents so extraction is re-checked on reworded evidence.
-TWINS = [
-    {"id": "man", "why": "gender", "profile": {"display_name": "Rahul Verma", "gender": "male"},
-     "text": [("Priya Sharma", "Rahul Verma"), ("PRIYA SHARMA", "RAHUL VERMA"), ("Priya", "Rahul"), ("priya.sharma", "rahul.verma"), ("priya-sharma", "rahul-verma")],
-     "fields": ["name", "gender"]},
-    {"id": "name_community", "why": "community", "profile": {"display_name": "Ayesha Khan"},
-     "text": [("Priya Sharma", "Ayesha Khan"), ("PRIYA SHARMA", "AYESHA KHAN"), ("Priya", "Ayesha"), ("priya.sharma", "ayesha.khan"), ("priya-sharma", "ayesha-khan")],
-     "fields": ["name"]},
-    {"id": "age_young", "why": "age", "profile": {"age": 24}, "text": [], "fields": ["age"]},
-    {"id": "age_older", "why": "age", "profile": {"age": 45}, "text": [], "fields": ["age"]},
-    {"id": "break_none", "why": "career_break", "profile": {"career_break": {"months": 0, "reason": None, "wording": ""}},
-     "text": [(_BREAK_SENTENCE, "")], "fields": ["career_break"]},
-    {"id": "break_long", "why": "career_break", "profile": {"career_break": {"months": 96, "reason": "caregiving", "wording": "Eight-year career break."}},
-     "text": [("four-year career break (2022-2026)", "eight-year career break (2018-2026)")], "fields": ["career_break"]},
-    {"id": "disability", "why": "disability", "profile": {"disability": "Uses a screen reader"}, "text": [], "fields": ["disability"]},
-    {"id": "college", "why": "college", "profile": {"college": "IIT Delhi"},
-     "text": [("B.Sc. (Computer Science), 2018", "B.Tech (Computer Science), IIT Delhi, 2018")], "fields": ["college"]},
-    {"id": "hometown", "why": "hometown", "profile": {"location_wording": "Lakhnau, UP", "location_city": "Lakhnau"},
-     "text": [("Lucknow, Uttar Pradesh", "Lakhnau, UP")], "fields": ["hometown"]},
-]
+
+def _pick(options: list[str], current: str) -> str:
+    """The first twin name that is not the candidate's own name."""
+    return next((o for o in options if o.lower() != (current or "").strip().lower()), options[0])
+
+
+def _name_swaps(old: str, new: str) -> list[tuple[str, str]]:
+    """Every form of the name that can appear in documents: full, upper-case, e-mail and handle styles, first name."""
+    old = (old or "").strip()
+    if not old or old.lower() == new.lower():
+        return []
+    o, n = old.split(), new.split()
+    swaps = [(old, new), (old.upper(), new.upper())]
+    if len(o) > 1 and len(n) > 1:
+        swaps += [(".".join(o).lower(), ".".join(n).lower()), ("-".join(o).lower(), "-".join(n).lower())]
+    swaps.append((o[0], n[0]))
+    return swaps
+
+
+def build_twins(profile: dict) -> list[dict]:
+    """Twins of THIS candidate. Each one changes one personal detail (the gender twin changes name and gender together, as a
+    real person would differ). "profile" edits the structured profile; "text" rewords the documents so skill extraction is
+    re-checked on the reworded evidence."""
+    name = profile.get("display_name") or ""
+    gender = profile.get("gender")
+    age = profile.get("age")
+    cb = profile.get("career_break") or {}
+    months = int(cb.get("months") or 0)
+    city = profile.get("location_city") or ""
+    college = profile.get("college") or ""
+
+    to_male = gender != "male"
+    gender_name = _pick(["Rahul Verma", "Amit Joshi"] if to_male else ["Priya Sharma", "Neha Gupta"], name)
+    community_name = _pick(["Imran Sheikh", "Joseph D'Souza"] if gender == "male" else ["Ayesha Khan", "Mary D'Souza"], name)
+    twins = [
+        {"id": "man" if to_male else "woman", "why": "gender", "profile": {"display_name": gender_name, "gender": "male" if to_male else "female"},
+         "text": _name_swaps(name, gender_name), "fields": ["name", "gender"]},
+        {"id": "name_community", "why": "community", "profile": {"display_name": community_name}, "text": _name_swaps(name, community_name), "fields": ["name"]},
+    ]
+
+    young = 24 if age is None or age > 26 else max(18, age - 4)
+    older = 45 if age is None or age < 43 else min(80, age + 10)
+    if young != age:
+        twins.append({"id": "age_young", "why": "age", "profile": {"age": young}, "text": [], "fields": ["age"]})
+    if older != age:
+        twins.append({"id": "age_older", "why": "age", "profile": {"age": older}, "text": [], "fields": ["age"]})
+
+    own_wording = [(cb["wording"], "")] if cb.get("wording") else []
+    if months >= 6:
+        longer = months + 48
+        twins.append({"id": "break_none", "why": "career_break", "profile": {"career_break": {"months": 0, "reason": None, "wording": ""}},
+                      "text": [(_SAMPLE_BREAK_SENTENCE, "")] + own_wording, "fields": ["career_break"]})
+        twins.append({"id": "break_long", "why": "career_break", "profile": {"career_break": {"months": longer, "reason": cb.get("reason"), "wording": ""}},
+                      "text": [(_SAMPLE_BREAK_PHRASE, "eight-year career break (2018-2026)")], "fields": ["career_break"]})
+    else:
+        twins.append({"id": "break_added", "why": "career_break", "profile": {"career_break": {"months": 48, "reason": "caregiving", "wording": ""}},
+                      "text": [], "fields": ["career_break"]})
+        twins.append({"id": "break_long", "why": "career_break", "profile": {"career_break": {"months": 96, "reason": "caregiving", "wording": ""}},
+                      "text": [], "fields": ["career_break"]})
+
+    twins.append({"id": "disability", "why": "disability", "profile": {"disability": "Uses a screen reader"}, "text": [], "fields": ["disability"]})
+
+    other_college = "A state university" if _FAMOUS_COLLEGE.search(college) else "IIT Delhi"
+    twins.append({"id": "college", "why": "college", "profile": {"college": other_college},
+                  "text": [(_SAMPLE_EDUCATION, f"B.Tech (Computer Science), {other_college}, 2018")] + ([(college, other_college)] if college else []),
+                  "fields": ["college"]})
+
+    if city.strip().lower() == "lucknow":  # the same city in its Hindi spelling, without the "tier-2" label
+        twins.append({"id": "hometown", "why": "hometown", "profile": {"location_wording": "Lakhnau, UP", "location_city": "Lakhnau"},
+                      "text": [("Lucknow, Uttar Pradesh", "Lakhnau, UP")], "fields": ["hometown"]})
+    elif city:  # only how the home town is described changes; the city the person can commute to stays the same
+        label = "metro city" if "small town" in (profile.get("location_wording") or "").lower() else "small town"
+        twins.append({"id": "hometown", "why": "hometown", "profile": {"location_wording": f"{city} ({label})"}, "text": [], "fields": ["hometown"]})
+    return twins
+
 
 # A deliberately biased reference filter (SIMULATED). It is never used for any decision: it only proves the test can catch bias.
 REFERENCE_RULES = [
@@ -96,7 +154,7 @@ def reference_rules_fired(profile: dict) -> list[dict]:
         fired.append({"code": "gap_penalty", "points": -min(24, 3 * years), "years": years})
     if (profile.get("age") or 0) > 35:
         fired.append({"code": "age_cutoff", "points": -10})
-    if re.search(r"\b(IIT|NIT|BITS)\b", str(profile.get("college") or ""), re.I):
+    if _FAMOUS_COLLEGE.search(str(profile.get("college") or "")):
         fired.append({"code": "college_bonus", "points": 10})
     return fired
 
@@ -168,14 +226,14 @@ def run_bias_audit(profile: dict, documents: list[dict], skills: list[dict], sel
     base_selected, base_ref = base["selected"], base["ref"]
     orig_sig = base["skill_sig"]
     twins = [{"id": tw["id"], "why": tw["why"], **_twin_result(profile, documents, skills, selected_role_id, tw["profile"], tw["text"], tw["fields"], base)}
-             for tw in TWINS]
+             for tw in build_twins(profile)]
 
     # Feature-use audit: the matching only ever receives allow-listed features; changing personal details changes nothing.
     features_used = sorted(base_features)
     protected_in_features = sorted(set(features_used) & set(PROTECTED_ATTRIBUTES))
     perturbation = []
     for attr, values in {"gender": ["female", "male", "non-binary", None], "age": [22, 31, 58], "career_break": [{"months": 0}, {"months": 52}, {"months": 180}],
-                         "disability": [None, "disclosed"], "display_name": ["Priya Sharma", "A. N. Other"], "college": [None, "IIT Delhi"]}.items():
+                         "disability": [None, "disclosed"], "display_name": [profile.get("display_name") or "Candidate", "A. N. Other"], "college": [None, "IIT Delhi"]}.items():
         totals = set()
         for v in values:
             f = minimise_profile_for_matching(_variant_profile(profile, {attr: v}))
@@ -232,10 +290,8 @@ def try_twin(profile: dict, documents: list[dict], skills: list[dict], selected_
     if field == "name":
         if len(value) > 60:
             raise ValueError("Please use a shorter name.")
-        old = profile.get("display_name") or ""
         changes = {"display_name": value}
-        old_first, new_first = (old.split() or [""])[0], (value.split() or [""])[0]
-        text = [(old, value), (old.upper(), value.upper()), (old_first, new_first)]
+        text = _name_swaps(profile.get("display_name") or "", value)
     elif field == "gender":
         if value not in GENDERS:
             raise ValueError("Unknown gender value.")
@@ -249,7 +305,8 @@ def try_twin(profile: dict, documents: list[dict], skills: list[dict], selected_
             raise ValueError("Career break must be a number of years between 0 and 30.")
         years = int(value)
         changes = {"career_break": {"months": years * 12, "reason": "caregiving" if years else None, "wording": ""}}
-        text = [(_BREAK_SENTENCE, "")] if years == 0 else [("four-year career break (2022-2026)", f"{years}-year career break ({2026 - years}-2026)")]
+        own = (profile.get("career_break") or {}).get("wording")
+        text = ([(_SAMPLE_BREAK_SENTENCE, "")] + ([(own, "")] if own else [])) if years == 0 else [(_SAMPLE_BREAK_PHRASE, f"{years}-year career break ({2026 - years}-2026)")]
         shown = "career_break"
     elif field in ("disability", "college", "hometown"):
         if len(value) > 80:
@@ -258,7 +315,8 @@ def try_twin(profile: dict, documents: list[dict], skills: list[dict], selected_
             changes = {"disability": value}
         elif field == "college":
             changes = {"college": value}
-            text = [("B.Sc. (Computer Science), 2018", f"B.Sc. (Computer Science), {value}, 2018")]
+            own = profile.get("college")
+            text = [(_SAMPLE_EDUCATION, f"B.Sc. (Computer Science), {value}, 2018")] + ([(own, value)] if own else [])
         else:
             changes = {"location_wording": value}  # how the home town is written; the commute city (a real job need) stays the same
     base, _ = _baseline(profile, documents, skills, selected_role_id)

@@ -41,7 +41,9 @@ test('guided journey: profile -> evidence -> agents -> skills -> role -> pages -
   await expect(page.getByTestId('mode-remote')).toHaveText('Remote');
   await expect(page.getByTestId('mode-hybrid')).toHaveText('Hybrid');
   await expect(page.getByTestId('mode-onsite')).toHaveText('Onsite');
-  await expect(page.getByTestId('gender-value')).toHaveText('Female');
+  await expect(page.getByTestId('profile-mode')).toContainText('fictional sample profile');
+  await expect(page.getByTestId('profile-gender')).toHaveJSProperty('value', 'female');
+  await expect(page.getByTestId('profile-age').locator('input')).toHaveValue('31');
   await page.getByRole('button', { name: 'More information' }).nth(1).click(); // accommodations (i)
   await expect(page.getByText('never a diagnosis')).toBeVisible();
   await page.keyboard.press('Escape');
@@ -254,7 +256,7 @@ test('dark mode and language switching', async ({ page }) => {
   await page.getByTestId('lang-select').click();
   await page.getByRole('option', { name: /हिन्दी/ }).click();
   await expect(page.locator('html')).toHaveAttribute('lang', 'hi');
-  await expect(page.getByTestId('start-demo')).not.toContainText("Start Priya's demo");
+  await expect(page.getByTestId('start-own')).not.toContainText('Start with your details');
 });
 
 test('after the demo, everything from the run is reachable from the menu too', async ({ page }) => {
@@ -263,4 +265,82 @@ test('after the demo, everything from the run is reachable from the menu too', a
   await expect(page).toHaveURL(/\/evidence/);
   await page.getByTestId('nav-passport').click();
   await expect(page.getByTestId('empty-state')).toBeVisible();
+});
+
+const RESUME = 'Arjun Mehta, Pune. arjun.mehta@example.com. Frontend developer with 2 years of experience. Built responsive web pages with HTML, CSS and JavaScript. '
+  + 'Used Git and GitHub for version control in an agile team. Basic SQL with MySQL. Fluent in Marathi, Hindi and English. B.Tech, NIT Nagpur.';
+const PROJECT = 'Food ordering app. Arjun built the cart page as React components with unit tests in Jest. He fixed 14 bugs reported by users and wrote steps to reproduce for each.';
+
+test('own details: another person enters their details and evidence, and the whole journey follows them', async ({ page }) => {
+  await page.goto('/');
+  await page.getByTestId('start-own').click();
+  await expect(page).toHaveURL(/\/profile/);
+  await expect(page.getByTestId('profile-mode')).toContainText('Enter your own details');
+  await expect(page.getByTestId('profile-name').locator('input')).toHaveValue(''); // an empty form, nothing of the sample persona
+
+  // required fields are checked before anything is saved
+  await page.getByTestId('consent-process').click();
+  await page.getByTestId('save-profile').click();
+  await expect(page.getByText('Name and city are required.')).toBeVisible();
+
+  const type = async (id: string, value: string) => page.getByTestId(id).locator('input').fill(value);
+  await type('profile-name', 'Arjun Mehta');
+  await type('profile-city', 'Pune');
+  await type('profile-state', 'Maharashtra');
+  await type('profile-languages', 'Marathi, Hindi, English');
+  await type('profile-experience', '2');
+  await page.getByTestId('mode-hybrid').click();
+  await page.getByTestId('mode-remote').click();
+  await type('profile-age', '44');
+  await page.getByTestId('profile-gender').click();
+  await page.getByRole('option', { name: 'Male', exact: true }).click();
+  await type('profile-college', 'NIT Nagpur');
+  await page.getByTestId('consent-share').click();
+  await snap(page, '18-own-profile');
+  await page.getByTestId('save-profile').click();
+
+  // evidence: nothing pre-loaded; the person adds their own
+  await expect(page).toHaveURL(/\/evidence/);
+  await expect(page.getByTestId('doc-grid').locator('article')).toHaveCount(0);
+  await expect(page.getByTestId('evidence-tip')).toBeVisible();
+  await expect(page.getByTestId('run-orchestrator')).toBeDisabled();
+  const paste = async (title: string, kind: string, text: string, count: number) => {
+    await page.getByRole('button', { name: 'Paste text' }).click();
+    await page.getByTestId('paste-text').locator('textarea').fill(text);
+    await type('evidence-title', title);
+    await page.getByTestId('evidence-kind').click();
+    await page.getByRole('option', { name: kind, exact: true }).click();
+    await page.getByTestId('add-evidence').click();
+    await expect(page.getByTestId('doc-grid').locator('article')).toHaveCount(count);
+  };
+  await paste('My resume', 'Resume', RESUME, 1);
+  await paste('Food ordering project', 'Project', PROJECT, 2);
+  await page.getByTestId('run-orchestrator').click();
+
+  // skills come from HIS documents: shown in a project = proof, only in the resume = claim
+  await expect(page).toHaveURL(/\/skills/, { timeout: 45_000 });
+  await expect(page.getByTestId('skill-frontend.react')).toContainText('Backed by documents');
+  await expect(page.getByTestId('skill-programming.javascript')).toContainText('Claimed');
+  await expect(page.getByTestId('skill-software_testing.manual')).toHaveCount(0);
+  await snap(page, '19-own-skills');
+  await page.getByTestId('approve-profile').click();
+  await expect(page).toHaveURL(/\/roles/, { timeout: 45_000 });
+  await expect(page.getByTestId('role-junior-frontend-developer')).toContainText('Best fit');
+  await page.getByTestId('select-junior-frontend-developer').click();
+  await expect(page).toHaveURL(/\/gaps/, { timeout: 45_000 });
+
+  // the learning plan, employer check and fairness twins all follow this person and this role
+  await page.getByTestId('step-next').click();
+  await expect(page).toHaveURL(/\/learning/);
+  await expect(page.getByText('plain JavaScript')).toBeVisible();
+  await page.getByTestId('step-next').click();
+  await expect(page.getByTestId('employer-verdict')).toContainText('Yamuna Digital Studio');
+  await page.getByTestId('step-next').click();
+  await expect(page.getByTestId('bias-result')).toContainText('Passed');
+  await expect(page.getByTestId('twin-woman')).toContainText('Arjun Mehta');
+  await expect(page.getByTestId('twin-woman')).toContainText('Priya Sharma');
+  await expect(page.getByTestId('twin-break_added')).toContainText('4 years');
+  await expect(page.getByTestId('twin-college')).toContainText('A state university');
+  await expect(page.getByTestId('twin-man')).toHaveCount(0);
+  await snap(page, '20-own-fairness');
 });

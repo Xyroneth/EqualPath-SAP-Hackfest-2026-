@@ -1,6 +1,6 @@
 """IdentityProvider: local password sign-in for the demo roles; XSUAA / SAP Cloud Identity Services on SAP BTP.
 
-Local mode: the Candidate is the open, anonymous demo user (Priya). Counsellor, HR Reviewer and Auditor each need
+Local mode: the Candidate is the open, anonymous user (anyone entering their own or someone else's details). Counsellor, HR Reviewer and Auditor each need
 their own password. A successful sign-in returns a signed, expiring token that the browser sends as a Bearer token.
 """
 from __future__ import annotations

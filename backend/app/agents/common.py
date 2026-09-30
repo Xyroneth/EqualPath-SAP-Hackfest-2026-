@@ -42,6 +42,20 @@ def improved_job_for(job: dict) -> dict | None:
     return next((j for j in jobs_data()["jobs"] if j["role_id"] == job["role_id"] and j.get("version") == "improved"), None)
 
 
+def match_taxonomy(name: str) -> str | None:
+    """The catalog capability a free-text skill name refers to (e.g. "Python" -> programming.python), or None."""
+    n = normalise_text(name)
+    if not n:
+        return None
+    for key, spec in taxonomy().items():
+        if n in (spec["skill_name"].lower(), key, key.split(".")[-1].replace("_", " ")):
+            return key
+    for key, spec in taxonomy().items():
+        if any(re.search(p, n, re.I) for p in spec["patterns"]):
+            return key
+    return None
+
+
 def capability_name(capability: str) -> str:
     t = taxonomy().get(capability)
     if t:

@@ -815,3 +815,11 @@ blockquote.claim-answer ui5-icon { flex: none; color: var(--muted); margin-top: 
 @media (max-width: 640px) {
   .sys-options, .try-cols { grid-template-columns: 1fr; }
 }
+
+/* profile: anyone's details */
+.form-grid.five { grid-template-columns: repeat(auto-fit, minmax(min(100%, 170px), 1fr)); align-items: end; }
+.row.center { justify-content: center; }
+.sample-strip { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.sample-strip .persona-text { flex: 1 1 260px; display: flex; flex-direction: column; }
+.sample-strip .persona-text em { font-style: normal; font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; color: var(--teal); }
+main:focus { outline: none; }
