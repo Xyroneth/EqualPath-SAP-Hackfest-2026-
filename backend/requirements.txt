@@ -1,0 +1,15 @@
+fastapi>=0.115
+uvicorn[standard]>=0.30
+pydantic>=2.8
+pydantic-settings>=2.4
+langgraph>=1.0
+langgraph-checkpoint-sqlite>=2.0
+httpx>=0.27
+cryptography>=43
+python-multipart>=0.0.9
+openpyxl>=3.1      # reads Excel evidence (text extraction + in-browser viewer)
+pypdf>=5.0         # reads PDF evidence
+# Optional SAP adapters (install on SAP BTP when used):
+# hdbcli>=2.21        # SAP HANA Cloud repository (REPOSITORY=hana)
+# sap-xssec>=4.1      # XSUAA JWT validation (IDENTITY_PROVIDER=xsuaa)
+# cfenv>=0.5

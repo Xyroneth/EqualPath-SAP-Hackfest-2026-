@@ -1,0 +1,73 @@
+_schema-version: "3.2"
+ID: equalpath
+version: 1.0.0
+description: EQUALPATH skills-first Career Orchestrator (SAP Hackfest 2026)
+parameters:
+  enable-parallel-deployments: true
+
+build-parameters:
+  before-all:
+    - builder: custom
+      commands:
+        - npm ci --prefix frontend
+        - npm run build --prefix frontend
+
+modules:
+  - name: equalpath-srv
+    type: python
+    path: backend
+    parameters:
+      buildpack: python_buildpack
+      memory: 512M
+      disk-quota: 1G
+      command: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+      health-check-type: http
+      health-check-http-endpoint: /api/health
+    properties:
+      LLM_PROVIDER: auto
+      IDENTITY_PROVIDER: xsuaa
+      REPOSITORY: sqlite            # set to hana and bind equalpath-hana-creds to use SAP HANA Cloud
+    provides:
+      - name: srv-api
+        properties:
+          srv-url: ${default-url}
+    requires:
+      - name: equalpath-xsuaa
+      - name: equalpath-aicore
+      # - name: equalpath-process-automation   # SAP Build Process Automation (optional)
+
+  - name: equalpath-approuter
+    type: approuter.nodejs
+    path: approuter
+    parameters:
+      memory: 256M
+      keep-existing-routes: true
+    requires:
+      - name: equalpath-xsuaa
+      - name: srv-api
+        group: destinations
+        properties:
+          name: equalpath-srv
+          url: ~{srv-url}
+          forwardAuthToken: true
+          timeout: 120000
+
+resources:
+  - name: equalpath-xsuaa
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: application
+      path: ./xs-security.json
+
+  - name: equalpath-aicore
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: aicore
+      service-plan: extended
+
+  # - name: equalpath-process-automation
+  #   type: org.cloudfoundry.managed-service
+  #   parameters:
+  #     service: process-automation-service
+  #     service-plan: standard

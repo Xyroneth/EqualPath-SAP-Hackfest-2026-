@@ -1,0 +1,52 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "EQUALPATH Review Actions",
+    "version": "1.0.0",
+    "description": "Import into an SAP Build Process Automation Actions project. The action returns the reviewer's decision to EQUALPATH, which resumes the paused LangGraph run."
+  },
+  "servers": [{ "url": "/" }],
+  "paths": {
+    "/api/integrations/sap-build/review-decision": {
+      "post": {
+        "operationId": "submitReviewDecision",
+        "summary": "Send the final human-review decision to EQUALPATH",
+        "parameters": [
+          { "name": "X-EqualPath-Callback-Secret", "in": "header", "required": true, "schema": { "type": "string" },
+            "description": "Shared secret (SBPA_CALLBACK_SECRET). Store it as a destination property, not in the process." }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["runId", "decision"],
+                "properties": {
+                  "runId": { "type": "string", "description": "EQUALPATH run id from the process context" },
+                  "decision": { "type": "string", "enum": ["approve", "edit", "reject", "request_evidence"] },
+                  "reason": { "type": "string", "description": "Required for reject and request_evidence" },
+                  "reviewer": { "type": "string", "description": "Reviewer display name from the task" },
+                  "reviewerRole": { "type": "string", "enum": ["counsellor", "hr_reviewer"] }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Decision accepted; workflow resumed", "content": { "application/json": { "schema": { "type": "object", "properties": { "ok": { "type": "boolean" } } } } } },
+          "409": { "description": "Run is not waiting for final review" },
+          "422": { "description": "Reason missing for an override" }
+        }
+      }
+    },
+    "/api/runs/{runId}": {
+      "get": {
+        "operationId": "getRun",
+        "summary": "Read run state (for showing the review packet in the SAP Build form)",
+        "parameters": [{ "name": "runId", "in": "path", "required": true, "schema": { "type": "string" } }],
+        "responses": { "200": { "description": "Run view" } }
+      }
+    }
+  }
+}

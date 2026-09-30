@@ -1,0 +1,14 @@
+{
+  "title": "EQUALPATH",
+  "subtitle": "Career Orchestrator",
+  "info": "Skills-first hiring readiness",
+  "icon": "sap-icon://career",
+  "type": "URL",
+  "url": "https://<your-equalpath-approuter>.cfapps.<region>.hana.ondemand.com/",
+  "targets": {
+    "Candidate": "/",
+    "Counsellor review queue": "/review",
+    "HR employer readiness": "/employer",
+    "Auditor": "/timeline"
+  }
+}

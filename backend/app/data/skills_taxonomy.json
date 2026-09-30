@@ -1,0 +1,221 @@
+{
+  "_data_label": "Locally seeded capability taxonomy used by the Skills Discovery and Learning Pathway agents.",
+  "skills": [
+    {
+      "normalized_skill": "software_testing.manual",
+      "skill_name": "Manual software testing",
+      "category": "technical",
+      "patterns": [
+        "regression test",
+        "manual testing",
+        "smoke testing",
+        "executed \\d+",
+        "tested the",
+        "verified by tester",
+        "retested after fixes"
+      ],
+      "adjacent_skills": [
+        "test automation",
+        "quality assurance"
+      ]
+    },
+    {
+      "normalized_skill": "software_testing.test_design",
+      "skill_name": "Test case design",
+      "category": "technical",
+      "patterns": [
+        "boundary value",
+        "equivalence partitioning",
+        "test case design",
+        "preconditions"
+      ],
+      "adjacent_skills": [
+        "test automation",
+        "risk-based testing"
+      ]
+    },
+    {
+      "normalized_skill": "software_testing.defect_management",
+      "skill_name": "Defect reporting and tracking",
+      "category": "technical",
+      "patterns": [
+        "steps to reproduce",
+        "defect rows",
+        "severity",
+        "logged and tracked defects",
+        "defect reporting",
+        "verified the fix",
+        "verified fixes"
+      ],
+      "adjacent_skills": [
+        "root-cause analysis",
+        "test management tools"
+      ]
+    },
+    {
+      "normalized_skill": "test_automation.browser",
+      "skill_name": "Browser test automation",
+      "category": "technical",
+      "patterns": [
+        "selenium",
+        "playwright",
+        "cypress",
+        "webdriver",
+        "browser automation"
+      ],
+      "adjacent_skills": [
+        "python scripting",
+        "ci pipelines"
+      ]
+    },
+    {
+      "normalized_skill": "programming.python",
+      "skill_name": "Python scripting",
+      "category": "technical",
+      "patterns": [
+        "python scripts",
+        "python \\(",
+        "\\.py:",
+        "pytest",
+        "python practice"
+      ],
+      "adjacent_skills": [
+        "test automation",
+        "data validation"
+      ]
+    },
+    {
+      "normalized_skill": "testing.unit_testing",
+      "skill_name": "Unit testing with pytest",
+      "category": "technical",
+      "patterns": [
+        "unit tests",
+        "pytest",
+        "parametrized tests"
+      ],
+      "adjacent_skills": [
+        "test automation",
+        "ci pipelines"
+      ]
+    },
+    {
+      "normalized_skill": "version_control.git",
+      "skill_name": "Version control with Git",
+      "category": "technical",
+      "patterns": [
+        "commits",
+        "pull requests",
+        "feature branches",
+        "git and github"
+      ],
+      "adjacent_skills": [
+        "ci pipelines",
+        "code review"
+      ]
+    },
+    {
+      "normalized_skill": "api_testing",
+      "skill_name": "API testing",
+      "category": "technical",
+      "patterns": [
+        "api test",
+        "postman",
+        "rest api",
+        "status code",
+        "json response"
+      ],
+      "adjacent_skills": [
+        "integration testing",
+        "test automation"
+      ]
+    },
+    {
+      "normalized_skill": "data.sql",
+      "skill_name": "SQL for test data",
+      "category": "technical",
+      "patterns": [
+        "sql",
+        "select \\*",
+        "database quer"
+      ],
+      "adjacent_skills": [
+        "data validation"
+      ]
+    },
+    {
+      "normalized_skill": "data.spreadsheet_analysis",
+      "skill_name": "Spreadsheet analysis (Excel)",
+      "category": "technical",
+      "patterns": [
+        "pivot tables",
+        "conditional formatting",
+        "summary tables",
+        "\\bcharts?\\b",
+        "workbook",
+        "ms excel"
+      ],
+      "adjacent_skills": [
+        "reporting",
+        "data quality"
+      ]
+    },
+    {
+      "normalized_skill": "enterprise_apps.sap_context",
+      "skill_name": "Enterprise application context (SAP BTP / SAP Build)",
+      "category": "domain",
+      "patterns": [
+        "sap btp",
+        "sap build",
+        "s/4hana",
+        "sap fiori",
+        "cloud alm",
+        "enterprise application"
+      ],
+      "adjacent_skills": [
+        "business process testing",
+        "low-code automation"
+      ]
+    },
+    {
+      "normalized_skill": "collaboration.agile",
+      "skill_name": "Agile team collaboration",
+      "category": "professional",
+      "patterns": [
+        "scrum",
+        "stand-ups",
+        "sprint",
+        "triage decisions agreed"
+      ],
+      "adjacent_skills": [
+        "stakeholder communication"
+      ]
+    },
+    {
+      "normalized_skill": "communication.bilingual",
+      "skill_name": "Bilingual communication (Hindi, English)",
+      "category": "professional",
+      "patterns": [
+        "hindi \\(native\\)",
+        "english \\(professional\\)",
+        "languages:"
+      ],
+      "adjacent_skills": [
+        "customer support",
+        "documentation"
+      ]
+    },
+    {
+      "normalized_skill": "software_testing.fundamentals",
+      "skill_name": "Software testing fundamentals (course)",
+      "category": "learning",
+      "patterns": [
+        "software testing fundamentals",
+        "defect life cycle",
+        "test levels"
+      ],
+      "adjacent_skills": [
+        "test automation concepts"
+      ]
+    }
+  ]
+}

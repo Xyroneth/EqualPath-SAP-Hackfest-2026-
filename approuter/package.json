@@ -1,0 +1,6 @@
+{
+  "name": "equalpath-approuter",
+  "private": true,
+  "scripts": { "start": "node node_modules/@sap/approuter/approuter.js" },
+  "dependencies": { "@sap/approuter": "^20.0.0" }
+}

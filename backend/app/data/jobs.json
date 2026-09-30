@@ -1,0 +1,182 @@
+{
+  "_data_label": "SEEDED JOB ADS and SIMULATED EMPLOYER DATA. Every employer here is fictional.",
+  "employers": {
+    "northstar": {
+      "employer_id": "northstar",
+      "name": "Northstar Enterprise Services (fictional)",
+      "short_name": "Northstar",
+      "city": "Lucknow",
+      "industry": "Enterprise software services",
+      "recruiting_contact": "recruiting-access@northstar.example",
+      "questionnaire": [
+        {"claim_id": "work_mode", "question": "What work mode does this role offer?", "answer": "Hybrid: two office days per week at our Lucknow hub; remote on other days."},
+        {"claim_id": "career_breaks", "question": "How do you evaluate career breaks?", "answer": "Career breaks are evaluated fairly; we assess current capability, not continuity."},
+        {"claim_id": "return_to_work", "question": "Do you offer return-to-work support?", "answer": "Yes. A 12-week returner programme with a named mentor and a phased workload."},
+        {"claim_id": "accessible_interviews", "question": "Are interview adjustments available?", "answer": "Yes. Candidates can request schedule changes or other interview adjustments through the recruiting contact."},
+        {"claim_id": "accommodation_process", "question": "Is there a documented workplace accommodation request process?", "answer": "Yes, handled by HR on request."}
+      ],
+      "policy_documents": [
+        {"source_id": "northstar-returner-policy.txt", "title": "Returner Programme Policy (simulated employer document)",
+         "text": "Northstar Returner Programme: Employees returning after a career break of one year or more join a 12-week returner programme with a named mentor, a phased workload during the first four weeks and fortnightly check-ins with their manager."},
+        {"source_id": "northstar-hybrid-policy.txt", "title": "Hybrid Work Policy (simulated employer document)",
+         "text": "Technology roles based at the Lucknow hub follow a hybrid pattern of two office days per week. Core collaboration hours are 11:00 to 16:00 IST."}
+      ],
+      "candidate_feedback": [
+        {"feedback_id": "fb-01", "claim_id": "accessible_interviews", "consented": true, "sentiment": "supports", "summary": "Interview was rescheduled on request with two days notice."},
+        {"feedback_id": "fb-02", "claim_id": "accessible_interviews", "consented": true, "sentiment": "supports", "summary": "Recruiter offered a morning slot after I asked."},
+        {"feedback_id": "fb-03", "claim_id": "accessible_interviews", "consented": true, "sentiment": "supports", "summary": "Screen-reader friendly assessment link was provided on request."},
+        {"feedback_id": "fb-04", "claim_id": "accessible_interviews", "consented": false, "sentiment": "supports", "summary": "Not used: no consent to use this feedback."},
+        {"feedback_id": "fb-05", "claim_id": "career_breaks", "consented": true, "sentiment": "contradicts", "summary": "Recruiter asked me to explain every month of my gap."}
+      ]
+    },
+    "kaveri": {
+      "employer_id": "kaveri",
+      "name": "Kaveri Product Labs (fictional)",
+      "short_name": "Kaveri",
+      "city": "Bengaluru",
+      "industry": "Retail billing software",
+      "recruiting_contact": "careers-access@kaveri.example",
+      "questionnaire": [
+        {"claim_id": "work_mode", "question": "What work mode does this role offer?", "answer": "Onsite: five days a week at our Bengaluru office."},
+        {"claim_id": "career_breaks", "question": "How do you evaluate career breaks?", "answer": "Career breaks are not a problem for us. We look at skills."},
+        {"claim_id": "return_to_work", "question": "Do you offer return-to-work support?", "answer": "Not at present."},
+        {"claim_id": "accessible_interviews", "question": "Are interview adjustments available?", "answer": "Yes. Candidates can ask for another interview slot."},
+        {"claim_id": "accommodation_process", "question": "Is there a documented workplace accommodation request process?", "answer": "Yes, through our HR team."}
+      ],
+      "policy_documents": [
+        {"source_id": "kaveri-attendance-policy.txt", "title": "Attendance Policy (simulated employer document)",
+         "text": "All product staff work onsite at the Bengaluru office five days a week. Standard working hours are 09:30 to 18:30 IST."}
+      ],
+      "candidate_feedback": [
+        {"feedback_id": "kv-01", "claim_id": "accessible_interviews", "consented": true, "sentiment": "contradicts", "summary": "The walk-in drive was announced two days before and could not be moved."},
+        {"feedback_id": "kv-02", "claim_id": "accessible_interviews", "consented": true, "sentiment": "contradicts", "summary": "I asked for a later slot and was told to come on the same day or not at all."},
+        {"feedback_id": "kv-03", "claim_id": "career_breaks", "consented": true, "sentiment": "contradicts", "summary": "Screened out because of a one-year gap."},
+        {"feedback_id": "kv-04", "claim_id": "work_mode", "consented": true, "sentiment": "supports", "summary": "Onsite five days, as described."}
+      ]
+    },
+    "gomti": {
+      "employer_id": "gomti",
+      "name": "Gomti Business Systems (fictional)",
+      "short_name": "Gomti",
+      "city": "Lucknow",
+      "industry": "SAP application support",
+      "recruiting_contact": "access@gomti.example",
+      "questionnaire": [
+        {"claim_id": "work_mode", "question": "What work mode does this role offer?", "answer": "Remote within India, or hybrid from our Lucknow office."},
+        {"claim_id": "career_breaks", "question": "How do you evaluate career breaks?", "answer": "Career breaks are welcome; we look at current skills."},
+        {"claim_id": "return_to_work", "question": "Do you offer return-to-work support?", "answer": "Yes. A 10-week returner programme with a buddy and a phased first month."},
+        {"claim_id": "accessible_interviews", "question": "Are interview adjustments available?", "answer": "Yes. Interviews are booked 48 hours ahead and can be moved on request."},
+        {"claim_id": "accommodation_process", "question": "Is there a documented workplace accommodation request process?", "answer": "Yes, through our HR helpdesk. We have supported screen-reader users."}
+      ],
+      "policy_documents": [
+        {"source_id": "gomti-returner-programme.txt", "title": "Returner Programme (simulated employer document)",
+         "text": "Career breaks are welcome at Gomti. Returners join a 10-week returner programme with a buddy, a phased first month and weekly check-ins."}
+      ],
+      "candidate_feedback": [
+        {"feedback_id": "gm-01", "claim_id": "career_breaks", "consented": true, "sentiment": "supports", "summary": "My three-year break was not questioned; they asked about my recent course."},
+        {"feedback_id": "gm-02", "claim_id": "career_breaks", "consented": true, "sentiment": "supports", "summary": "The interviewer focused on a practical ticket exercise."},
+        {"feedback_id": "gm-03", "claim_id": "career_breaks", "consented": true, "sentiment": "supports", "summary": "Joined after a two-year break; the returner buddy helped."},
+        {"feedback_id": "gm-04", "claim_id": "accessible_interviews", "consented": true, "sentiment": "supports", "summary": "Interview moved by a day when I asked."}
+      ]
+    },
+    "indus": {
+      "employer_id": "indus",
+      "name": "Indus Data Works (fictional)",
+      "short_name": "Indus",
+      "city": "Remote - India",
+      "industry": "Retail data services",
+      "recruiting_contact": "people@indus.example",
+      "questionnaire": [
+        {"claim_id": "work_mode", "question": "What work mode does this role offer?", "answer": "Fully remote within India."},
+        {"claim_id": "career_breaks", "question": "How do you evaluate career breaks?", "answer": "We welcome everyone who can do the work."},
+        {"claim_id": "return_to_work", "question": "Do you offer return-to-work support?", "answer": "We are open to returners."},
+        {"claim_id": "accessible_interviews", "question": "Are interview adjustments available?", "answer": "Yes, on request."},
+        {"claim_id": "accommodation_process", "question": "Is there a documented workplace accommodation request process?", "answer": "Yes, we follow our workplace adjustments policy."}
+      ],
+      "policy_documents": [
+        {"source_id": "indus-adjustments-policy.txt", "title": "Workplace Adjustments Policy (simulated employer document)",
+         "text": "Employees can request reasonable adjustments, such as screen magnifiers, screen readers or extra breaks, through the People Team. Requests are answered within five working days."}
+      ],
+      "candidate_feedback": [
+        {"feedback_id": "in-01", "claim_id": "career_breaks", "consented": true, "sentiment": "contradicts", "summary": "Told the role was only for recent graduates."},
+        {"feedback_id": "in-02", "claim_id": "career_breaks", "consented": false, "sentiment": "contradicts", "summary": "Not used: no consent to use this feedback."}
+      ]
+    },
+    "yamuna": {
+      "employer_id": "yamuna",
+      "name": "Yamuna Digital Studio (fictional)",
+      "short_name": "Yamuna",
+      "city": "Noida",
+      "industry": "Web and app studio",
+      "recruiting_contact": "talent@yamuna.example",
+      "questionnaire": [
+        {"claim_id": "work_mode", "question": "What work mode does this role offer?", "answer": "Hybrid: three office days a week in Noida."},
+        {"claim_id": "career_breaks", "question": "How do you evaluate career breaks?", "answer": "We hire on skills."},
+        {"claim_id": "return_to_work", "question": "Do you offer return-to-work support?", "answer": "Not at present."},
+        {"claim_id": "accessible_interviews", "question": "Are interview adjustments available?", "answer": "Yes, candidates can ask for changes."},
+        {"claim_id": "accommodation_process", "question": "Is there a documented workplace accommodation request process?", "answer": "Yes."}
+      ],
+      "policy_documents": [],
+      "candidate_feedback": [
+        {"feedback_id": "ym-01", "claim_id": "accessible_interviews", "consented": true, "sentiment": "supports", "summary": "They moved my technical round by a day."}
+      ]
+    }
+  },
+  "jobs": [
+    {
+      "job_id": "northstar-qa-automation-v1", "role_id": "qa-automation-associate", "employer_id": "northstar", "version": "original",
+      "version_label": "Original job ad", "title": "QA Automation Associate",
+      "duties": "You design and automate regression tests with developers and business analysts, share clear written test results and plan your work in two-week sprints.",
+      "text": "QA Automation Associate - Northstar Enterprise Services\n\nAbout the role: Join our QA team testing enterprise business applications.\n\nRequirements:\n- B.Tech or B.E. degree from a top-tier institution (IIT/NIT preferred).\n- Minimum 3 years of uninterrupted experience in software testing; candidates with gaps in employment will not be considered.\n- Hands-on experience with Selenium or Playwright and Python.\n- Experience testing REST APIs.\n- Exposure to SAP or other enterprise applications.\n\nWho you are: A rockstar tester who thrives in our fast-paced culture and is a strong culture fit.\n\nApply now with your resume."
+    },
+    {
+      "job_id": "northstar-qa-automation-v2", "role_id": "qa-automation-associate", "employer_id": "northstar", "version": "improved",
+      "version_label": "Employer's improved job ad", "title": "QA Automation Associate",
+      "text": "QA Automation Associate - Northstar Enterprise Services\n\nAbout the role: Design and automate regression tests for enterprise business applications, working closely with developers and business analysts.\n\nWhat you need (role-essential):\n- Demonstrated experience designing and executing test cases and reporting defects.\n- Basic Python scripting and willingness to build browser test automation (Selenium or Playwright).\n- Basic understanding of REST API testing, or willingness to learn it in the first month.\n- Awareness of enterprise applications such as SAP solutions (training provided).\n\nWork mode and location: Hybrid - two office days per week at our Lucknow hub, remote on other days. Core collaboration hours are 11:00 to 16:00 IST.\n\nCareer breaks: Candidates with career breaks are encouraged to apply. We evaluate demonstrated, current capability and do not penalise gaps in employment. Returners join our 12-week return-to-work programme with a named mentor.\n\nInterviews and accommodations: Interviews are scheduled with at least 48 hours notice. To request an interview adjustment or a workplace accommodation, contact our accessible recruiting desk at recruiting-access@northstar.example (response within two working days).\n\nApply with your resume or work samples."
+    },
+    {
+      "job_id": "kaveri-test-analyst-v1", "role_id": "software-test-analyst", "employer_id": "kaveri", "version": "original",
+      "version_label": "Original job ad", "title": "Software Test Analyst (Manual)",
+      "duties": "You plan and run manual tests before every release, write clear defect reports and confirm fixes with developers.",
+      "text": "Software Test Analyst (Manual) - Kaveri Product Labs\n\nAbout the role: Test our retail billing product before every release.\n\nRequirements:\n- Age between 22 and 28 years.\n- Male candidates preferred as the role needs late evening releases.\n- Minimum 2 years of continuous experience in manual testing; no career gaps.\n- Good knowledge of test case design and defect tracking tools.\n- Basic SQL for checking test data.\n\nWork mode and location: Onsite, five days a week at our Bengaluru office (Koramangala). Working hours 09:30 to 18:30 IST, with late evenings on release days.\n\nInterviews: Walk-in drive only; dates are announced at short notice. No rescheduling.\n\nApply now with your resume."
+    },
+    {
+      "job_id": "kaveri-test-analyst-v2", "role_id": "software-test-analyst", "employer_id": "kaveri", "version": "improved",
+      "version_label": "Employer's improved job ad", "title": "Software Test Analyst (Manual)",
+      "text": "Software Test Analyst (Manual) - Kaveri Product Labs\n\nAbout the role: Test our retail billing product before every release. You plan test cases, run them, log clear defect reports and confirm fixes with developers.\n\nWhat you need (role-essential):\n- 2 years of manual testing experience in total. It does not need to be continuous; career breaks are welcome.\n- Test case design and defect tracking (any tool).\n- Basic SQL for checking test data, or willingness to learn it in the first month.\n\nWork mode and location: Onsite, five days a week at our Bengaluru office (Koramangala). We offer one month of accommodation if you move to Bengaluru.\n\nWorking hours: 09:30 to 18:30 IST. Release evenings are planned a month ahead on a shared rota, and you can swap them.\n\nCareer breaks: Candidates returning after a break are encouraged to apply. We assess current skills with a short practical task, not your employment history.\n\nInterviews and accommodations: Interviews are booked at least 48 hours ahead and you can choose another slot. To ask for an interview adjustment or a workplace accommodation, write to careers-access@kaveri.example (reply within two working days).\n\nApply with your resume or work samples."
+    },
+    {
+      "job_id": "gomti-app-support-v1", "role_id": "application-support-analyst", "employer_id": "gomti", "version": "original",
+      "version_label": "Original job ad", "title": "Application Support Analyst (SAP, L1)",
+      "duties": "You answer user tickets, solve common problems and pass defects to the right team with clear notes.",
+      "text": "Application Support Analyst (SAP, L1) - Gomti Business Systems\n\nAbout the role: Be the first point of contact for business users of our SAP-based order and billing apps. You log tickets, solve common problems and pass defects to the right team.\n\nRequirements:\n- Graduate from a reputed university.\n- 1 year of experience in IT support, testing or a similar role.\n- Clear written and spoken English and Hindi.\n- Basic SQL and Excel for checking data.\n- Awareness of SAP applications (we train you on our systems).\n\nWork mode and location: Remote within India, or hybrid from our Lucknow office. Shift 09:00 to 17:30 IST, Monday to Friday.\n\nReturners: We run a returner programme with a buddy and a phased first month.\n\nInterviews: Two video interviews, booked at least 48 hours ahead with our recruiting contact.\n\nApply now with your resume."
+    },
+    {
+      "job_id": "gomti-app-support-v2", "role_id": "application-support-analyst", "employer_id": "gomti", "version": "improved",
+      "version_label": "Employer's improved job ad", "title": "Application Support Analyst (SAP, L1)",
+      "text": "Application Support Analyst (SAP, L1) - Gomti Business Systems\n\nAbout the role: Be the first point of contact for business users of our SAP-based order and billing apps. You log tickets, solve common problems and pass defects to the right team.\n\nWhat you need (role-essential):\n- 1 year of experience in IT support, testing or a similar role. Experience from before a career break counts.\n- Clear written and spoken English and Hindi.\n- Basic SQL and Excel for checking data.\n- Awareness of SAP applications (we train you on our systems).\n- No specific degree or college is required.\n\nWork mode and location: Remote within India, or hybrid from our Lucknow office. Shift 09:00 to 17:30 IST, Monday to Friday.\n\nReturners: Career breaks are welcome. We run a 10-week returner programme with a buddy and a phased first month.\n\nInterviews and accommodations: Two video interviews, booked at least 48 hours ahead; you can ask to move them. For an interview adjustment or a workplace accommodation, contact access@gomti.example (reply within two working days).\n\nApply with your resume or work samples."
+    },
+    {
+      "job_id": "indus-data-quality-v1", "role_id": "data-quality-associate", "employer_id": "indus", "version": "original",
+      "version_label": "Original job ad", "title": "Data Quality Associate",
+      "duties": "You check data against agreed rules, log each problem with an example and review the quality dashboard with the client team every week.",
+      "text": "Data Quality Associate - Indus Data Works\n\nAbout the role: Check customer and product data for our retail clients and keep the data-quality dashboard up to date.\n\nRequirements:\n- Freshers only: 2025 or 2026 pass-outs.\n- Must be physically fit with perfect eyesight for long screen hours.\n- Strong Excel skills (lookups, pivot tables) and basic SQL.\n- Some Python for simple data checks is a plus.\n- Candidates from tier-1 colleges preferred.\n\nWho you are: A data ninja who works hard, plays hard and is a great culture fit.\n\nWork mode: Fully remote within India.\n\nApply now with your resume."
+    },
+    {
+      "job_id": "indus-data-quality-v2", "role_id": "data-quality-associate", "employer_id": "indus", "version": "improved",
+      "version_label": "Employer's improved job ad", "title": "Data Quality Associate",
+      "text": "Data Quality Associate - Indus Data Works\n\nAbout the role: Check customer and product data for our retail clients and keep the data-quality dashboard up to date.\n\nWhat you need (role-essential):\n- Good Excel skills (lookups, pivot tables) and basic SQL.\n- Some Python for simple data checks, or willingness to learn it with our training.\n- Care for detail: you spot data problems and explain them clearly.\n- Freshers and experienced people are both welcome. No specific degree or college is required.\n\nHow you will work: You check data against agreed rules, log each problem with an example and review the quality dashboard with the client team every week.\n\nWork mode and hours: Fully remote within India. Working hours 10:00 to 18:00 IST, with flexible breaks.\n\nCareer breaks: Career breaks are welcome. Returners get a mentor for the first two months.\n\nInterviews and accommodations: Interviews are online and booked at least 48 hours ahead. For an interview adjustment or a workplace accommodation (for example screen magnifiers or extra breaks), contact people@indus.example.\n\nApply with your resume or work samples."
+    },
+    {
+      "job_id": "yamuna-frontend-v1", "role_id": "junior-frontend-developer", "employer_id": "yamuna", "version": "original",
+      "version_label": "Original job ad", "title": "Junior Frontend Developer",
+      "duties": "You turn designs into React components, review code with a senior developer and test your screens on phones and laptops.",
+      "text": "Junior Frontend Developer - Yamuna Digital Studio\n\nAbout the role: Build screens for our clients' shopping and booking websites.\n\nRequirements:\n- B.Tech from IIT, NIT or other tier-1 colleges only.\n- Good JavaScript and React; Git for version control.\n- Unmarried candidates preferred as the role needs travel to client sites at short notice.\n- Knowledge of manual testing is a plus.\n\nWho you are: A young and energetic rockstar coder who thrives in a fast-paced startup.\n\nWork mode and location: Hybrid, three office days a week in Noida Sector 62. Working hours 10:00 to 19:00 IST.\n\nApply now with your resume."
+    },
+    {
+      "job_id": "yamuna-frontend-v2", "role_id": "junior-frontend-developer", "employer_id": "yamuna", "version": "improved",
+      "version_label": "Employer's improved job ad", "title": "Junior Frontend Developer",
+      "text": "Junior Frontend Developer - Yamuna Digital Studio\n\nAbout the role: Build screens for our clients' shopping and booking websites, working with a designer and a senior developer.\n\nWhat you need (role-essential):\n- Good JavaScript and React, shown through projects, work samples or experience.\n- Git for version control.\n- Knowledge of manual testing is a plus.\n- No specific degree or college is required.\n\nHow you will work: You turn designs into React components, review code with a senior developer and test your screens on phones and laptops. Client visits are planned at least a week ahead.\n\nWork mode and location: Hybrid, three office days a week in Noida Sector 62. Working hours 10:00 to 19:00 IST.\n\nCareer breaks: Career breaks are welcome. We assess current skills with a short take-home task.\n\nInterviews and accommodations: Interviews are booked at least 48 hours ahead. For an interview adjustment or a workplace accommodation, contact talent@yamuna.example.\n\nApply with your resume or work samples."
+    }
+  ]
+}

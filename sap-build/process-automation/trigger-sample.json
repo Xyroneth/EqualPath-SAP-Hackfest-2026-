@@ -1,0 +1,13 @@
+{
+  "definitionId": "<SBPA_DEFINITION_ID of 'EQUALPATH Final Review'>",
+  "context": {
+    "runId": "run-441c76ed49",
+    "candidateRef": "cand-3f9a1c2b7e",
+    "roleTitle": "QA Automation Associate (Enterprise Applications)",
+    "proposedOutcomes": "Ready with Learning Milestone, Employer Action Required",
+    "gapSummary": "{'verified': 6, 'developing': 1, 'missing': 2}",
+    "employerFlags": 8,
+    "biasAuditResult": "PASS - no material change across 8 counterfactual profiles",
+    "reviewUrl": "/review?run=run-441c76ed49"
+  }
+}

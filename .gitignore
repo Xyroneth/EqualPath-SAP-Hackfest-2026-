@@ -1,0 +1,17 @@
+node_modules/
+.venv/
+__pycache__/
+*.db
+*.db-*
+.env
+backend/app/static/
+frontend/test-results/
+frontend/playwright-report/
+.pytest_cache/
+mta_archives/
+*.mtar
+.DS_Store
+*.log
+# Local-only files: hackathon handbook (organiser's document) and a debugging screenshot
+Student Handbook_Hackfest 2026.pdf
+Screenshot *.png

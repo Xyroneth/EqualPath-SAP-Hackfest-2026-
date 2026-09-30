@@ -1,0 +1,23 @@
+# SAP BTP, Cloud Foundry runtime - quick deployment (cf push) of the single-container app.
+# Build the frontend first:  cd frontend && npm ci && npm run build   (writes backend/app/static)
+# For XSUAA-protected deployment with the approuter, use mta.yaml instead.
+applications:
+  - name: equalpath
+    path: backend
+    memory: 512M
+    disk_quota: 1G
+    instances: 1
+    buildpacks:
+      - python_buildpack
+    command: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    health-check-type: http
+    health-check-http-endpoint: /api/health
+    env:
+      LLM_PROVIDER: auto
+      IDENTITY_PROVIDER: local
+      REPOSITORY: sqlite
+      DEMO_STEP_DELAY_MS: "300"
+      # Secrets are NOT stored here. Bind services or use:  cf set-env equalpath AICORE_SERVICE_KEY '<json>'
+    # services:
+    #   - equalpath-aicore      # SAP AI Core (extended plan) - read from VCAP_SERVICES automatically
+    #   - equalpath-xsuaa       # set IDENTITY_PROVIDER=xsuaa once the approuter is in front

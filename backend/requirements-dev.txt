@@ -1,0 +1,5 @@
+-r requirements.txt
+pytest>=8
+# Only to regenerate the sample evidence files (scripts/generate_evidence.py):
+reportlab>=4
+Pillow>=10

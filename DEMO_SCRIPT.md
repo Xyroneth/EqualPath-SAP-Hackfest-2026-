@@ -1,0 +1,33 @@
+# EQUALPATH live demo script (about 4 minutes)
+
+**Before you go on stage**
+- Run `./scripts/start.sh` (or `docker compose up --build`) and open http://localhost:8000 at **1440 px** width.
+- Check the AI chip in the top bar: *AI: SAP AI Core* if credentials are set, otherwise *AI: Demo mode*. Say which one out loud.
+- Staff passwords (also in the README): **Counsellor** `Counsel@2026`, **HR Reviewer** `HRreview@2026`, **Auditor** `Audit@2026`.
+- Keep a fallback: screenshots from `EQUALPATH_SHOTS=docs/screenshots npx playwright test`, or a screen recording.
+- Resetting: **Start over** in the menu, or *Start Priya's demo* on the home page, always begins a fresh run.
+- The app is in **English or हिन्दी** (globe menu in the top bar) and has a **dark mode** (moon button). Both are safe to show live.
+
+The coloured bar under the top bar always says who you are acting as. Every step ends with a big **Next** button, so you never have to hunt through the menu. The menu still works if you prefer it.
+
+| Time | Step | Click | Say |
+|---|---|---|---|
+| 0:00 | **1. Profile and consent** | *Start Priya's demo* → tick both consent boxes → *Save and continue* | "Priya, 31, Lucknow. Three years as a tester, then a four-year caregiving break. Consent comes first: nothing is shared without her approval. Gender, age and career break are used only to test fairness, never for ranking." Tap the **(i)** next to *Accessibility and accommodations* to show the privacy note. |
+| 0:30 | **2. Evidence** | Open *resume.pdf* and *defect-tracker.xlsx* (**View** opens a new tab) → *Analyse my evidence* | "Real documents, not text blobs: PDFs with charts and screenshots, and an Excel tracker with a dashboard. She can add PDF, Word, PowerPoint, Excel, CSV, code, text or images. Only Priya, and the counsellor she is working with, can open them, and every opening is logged." The page moves on by itself when the agents finish. |
+| 1:05 | **3. Skills (human pause 1)** | Point at **Claimed** on *Browser test automation* → optionally *Remove* a skill with a reason → *Approve and continue* | "Every skill shows the exact quote and source. **Selenium is only in her resume, so it stays *Claimed*.** The model cannot upgrade it; the status is set in code. The agents wait until Priya approves." |
+| 1:25 | **4. Role options** | Point at the score bars → *Select this role* on **QA Automation Associate** | "No black-box score: five visible parts. The onsite Bengaluru role has stronger skills but conflicts with her no-relocation constraint. Gender, age and career break are not inputs." |
+| 1:50 | **5. Skill gaps** | *Next* | "Proven, growing and missing, each with a reason." |
+| 2:05 | **6. Learning plan** | Click **Open in SAP Learning** on the SAP Build step → back → *I started* → *Next* | "Three short steps, about 14 hours, evening-friendly. The SAP asset comes from a curated catalog and opens by link. We do not read progress from SAP; Priya uploads evidence and a human accepts it." |
+| 2:35 | **7. Employer check** | Point at the red lines in the ad → *Suggested rewrite* tab (green = changed) → *Employer's improved ad* → scroll to *What the employer says* | "This is Northstar's real ad for the role Priya chose. Red lines are barriers: a top-college rule and **uninterrupted experience**. The ad never states work mode or hours. The employer *says* career breaks are fine, but its own ad contradicts that, so the claim is **Conflicting** and goes to HR. The rewrite fixes every line and HR must approve it. Each role has its own employer: pick another role and you get another ad with other barriers, like age limits or 'male candidates preferred'." |
+| 3:00 | **8. Fairness check** | Point at the twin cards → click **A biased résumé filter** at the top → *Try your own twin*: *Age* → `52` → *Run the check* | "We made 9 twins of Priya: Rahul, Ayesha, age 24 and 45, no break, an 8-year break, a disability, an IIT degree. Same skills, same documents. EQUALPATH's score stays exactly the same every time, because it never looks at those details. A check that always says 'pass' proves nothing, so here is the same check on a deliberately biased filter: 4 of 9 twins turn red, and each card names the rule that caused it. And you can try any change yourself, live: age 52 moves the biased filter by 10 points and EQUALPATH by zero." |
+| 3:20 | **9. Human review (pause 2)** | *Next* → *Sign in as Counsellor* → password `Counsel@2026` → *Edit something* → step *ms-3*, *Estimated hours*, `6`, reason "Evening sessions are short; allow a buffer" → *Add change* → overall reason → *Submit decision* | "No passport before a person approves. Staff roles need their own password, so nobody can act as the counsellor by accident. The reason for every change is mandatory. In production this task appears in the **SAP Build Process Automation** inbox." |
+| 3:45 | **10. Passport** | Lands on the passport automatically → *Employer copy* → *Print / PDF* | "**Ready with Learning Milestone** for Priya and **Employer Action Required** for Northstar, each with an owner. Every claim shows its source and status. It is decision support, not a job guarantee." |
+| 4:00 | Close | Menu → *Architecture* | "What is live, what is sample data and what is a ready-to-connect SAP adapter, stated honestly." |
+
+**Employer side (1 minute, after the passport):** click **HR Reviewer** in the role bar and sign in with `HRreview@2026`. *Employer tasks* shows three tasks. (1) *Open the ad* → *Suggested rewrite* → reason → *Approve rewrite*. (2) Under *What the employer says*, on "How are career breaks treated?" choose *Our answer is right: fix the ad* and write what will change. (3) *Open passport* → *Invite to interview* → tick the interview adjustments Priya shared → reason → *Send response*. Say: "HR speaks for the employer, so HR never approves Priya's passport. HR fixes the job and answers Priya." Evidence and skills show "this page is for someone else".
+
+**Oversight (45 seconds):** **Auditor** (`Audit@2026`) lands on *Agent activity* with four tasks: *Verify now* re-checks every fingerprint in the log, *Open fairness check* → *No concerns* → note → *Record finding* (the counsellor and the passport show it), *See the list* shows who opened Priya's documents, and *Download CSV* exports the log. Priya's real details are hidden from the auditor, even in the twin cards.
+
+**Back as Priya:** her passport now shows "Northstar invited you to an interview" with the agreed adjustments.
+
+**Q&A extras:** *Agent activity* shows the hash-chained audit log. `/docs` shows the API. The globe menu switches to Hindi.

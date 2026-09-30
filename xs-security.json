@@ -1,0 +1,26 @@
+{
+  "xsappname": "equalpath",
+  "tenant-mode": "dedicated",
+  "description": "EQUALPATH role-based access",
+  "scopes": [
+    { "name": "$XSAPPNAME.Candidate", "description": "Manage own profile, consent, evidence and approvals" },
+    { "name": "$XSAPPNAME.Counsellor", "description": "Final review and milestone evidence review" },
+    { "name": "$XSAPPNAME.HRReviewer", "description": "Final review and job-description rewrite approval" },
+    { "name": "$XSAPPNAME.Auditor", "description": "Read-only access to audit log and bias audit" }
+  ],
+  "role-templates": [
+    { "name": "Candidate", "scope-references": ["$XSAPPNAME.Candidate"] },
+    { "name": "Counsellor", "scope-references": ["$XSAPPNAME.Counsellor"] },
+    { "name": "HRReviewer", "scope-references": ["$XSAPPNAME.HRReviewer"] },
+    { "name": "Auditor", "scope-references": ["$XSAPPNAME.Auditor"] }
+  ],
+  "role-collections": [
+    { "name": "EQUALPATH_Candidate", "role-template-references": ["$XSAPPNAME.Candidate"] },
+    { "name": "EQUALPATH_Counsellor", "role-template-references": ["$XSAPPNAME.Counsellor"] },
+    { "name": "EQUALPATH_HRReviewer", "role-template-references": ["$XSAPPNAME.HRReviewer"] },
+    { "name": "EQUALPATH_Auditor", "role-template-references": ["$XSAPPNAME.Auditor"] }
+  ],
+  "oauth2-configuration": {
+    "redirect-uris": ["https://*.hana.ondemand.com/**", "https://*.applicationstudio.cloud.sap/**"]
+  }
+}

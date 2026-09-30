@@ -1,0 +1,9 @@
+{
+  "welcomeFile": "/index.html",
+  "authenticationMethod": "route",
+  "routes": [
+    { "source": "^/api/integrations/sap-build/(.*)$", "target": "/api/integrations/sap-build/$1", "destination": "equalpath-srv", "authenticationType": "none", "csrfProtection": false },
+    { "source": "^/api/(.*)$", "target": "/api/$1", "destination": "equalpath-srv", "authenticationType": "xsuaa", "csrfProtection": false },
+    { "source": "^/(.*)$", "target": "/$1", "destination": "equalpath-srv", "authenticationType": "xsuaa" }
+  ]
+}

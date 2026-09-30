@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="EQUALPATH - skills-first multi-agent career orchestrator (SAP Hackfest 2026 prototype)" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <title>EQUALPATH</title>
+  </head>
+  <body>
+    <script>
+      /* Pick the saved (or system) theme before anything renders: no flash, and SAP UI5 boots straight into it. */
+      (function () {
+        try {
+          var t = localStorage.getItem('equalpath.theme');
+          if (t !== 'light' && t !== 'dark') t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+          document.documentElement.setAttribute('data-theme', t);
+          var c = document.createElement('script');
+          c.type = 'application/json';
+          c.setAttribute('data-ui5-config', '');
+          c.text = JSON.stringify({ theme: t === 'dark' ? 'sap_horizon_dark' : 'sap_horizon' });
+          document.head.appendChild(c);
+        } catch (e) {}
+      })();
+    </script>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

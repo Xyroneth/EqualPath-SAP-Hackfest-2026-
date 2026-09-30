@@ -1,0 +1,275 @@
+{
+  "_data_label": "LOCAL ROLE CATALOG - locally seeded, illustrative. Not scraped from job websites. Demand signals are team-authored assumptions, not market statistics.",
+  "roles": [
+    {
+      "role_id": "qa-automation-associate",
+      "title": "QA Automation Associate (Enterprise Applications)",
+      "summary": "Designs and automates regression tests for enterprise business applications, working with developers and business analysts.",
+      "work_modes": [
+        "hybrid",
+        "remote"
+      ],
+      "locations": [
+        "Lucknow",
+        "Noida"
+      ],
+      "relocation_required": false,
+      "interview_schedule": "Scheduled with 48 hours notice (per improved JD)",
+      "languages_required": [
+        "English"
+      ],
+      "min_relevant_experience_years": 1,
+      "demand_signal": "growing",
+      "demand_note": "Team assumption: automation skills are increasingly requested for enterprise QA roles. Illustrative only.",
+      "job_ids": [
+        "northstar-qa-automation-v1",
+        "northstar-qa-automation-v2"
+      ],
+      "requirements": [
+        {
+          "capability": "software_testing.manual",
+          "level": "intermediate",
+          "importance": "essential"
+        },
+        {
+          "capability": "software_testing.test_design",
+          "level": "basic",
+          "importance": "essential"
+        },
+        {
+          "capability": "software_testing.defect_management",
+          "level": "intermediate",
+          "importance": "essential"
+        },
+        {
+          "capability": "programming.python",
+          "level": "basic",
+          "importance": "essential"
+        },
+        {
+          "capability": "version_control.git",
+          "level": "basic",
+          "importance": "essential"
+        },
+        {
+          "capability": "test_automation.browser",
+          "level": "basic",
+          "importance": "essential"
+        },
+        {
+          "capability": "api_testing",
+          "level": "basic",
+          "importance": "essential"
+        },
+        {
+          "capability": "enterprise_apps.sap_context",
+          "level": "awareness",
+          "importance": "essential"
+        },
+        {
+          "capability": "collaboration.agile",
+          "level": "basic",
+          "importance": "preferred"
+        }
+      ]
+    },
+    {
+      "role_id": "software-test-analyst",
+      "title": "Software Test Analyst (Manual)",
+      "summary": "Executes manual functional and regression test cycles for a product team.",
+      "work_modes": [
+        "onsite"
+      ],
+      "locations": [
+        "Bengaluru"
+      ],
+      "relocation_required": true,
+      "interview_schedule": "Walk-in drive, dates announced at short notice",
+      "languages_required": [
+        "English"
+      ],
+      "min_relevant_experience_years": 2,
+      "demand_signal": "stable",
+      "demand_note": "Team assumption: manual-only roles are stable but less often advertised as remote. Illustrative only.",
+      "job_ids": [
+        "kaveri-test-analyst-v1",
+        "kaveri-test-analyst-v2"
+      ],
+      "requirements": [
+        {
+          "capability": "software_testing.manual",
+          "level": "intermediate",
+          "importance": "essential"
+        },
+        {
+          "capability": "software_testing.test_design",
+          "level": "basic",
+          "importance": "essential"
+        },
+        {
+          "capability": "software_testing.defect_management",
+          "level": "intermediate",
+          "importance": "essential"
+        },
+        {
+          "capability": "data.sql",
+          "level": "basic",
+          "importance": "essential"
+        },
+        {
+          "capability": "collaboration.agile",
+          "level": "basic",
+          "importance": "preferred"
+        }
+      ]
+    },
+    {
+      "role_id": "application-support-analyst",
+      "title": "Application Support Analyst (SAP Enterprise Apps, L1)",
+      "summary": "Triages user tickets for enterprise applications, reproduces issues and routes defects to product teams.",
+      "work_modes": [
+        "remote",
+        "hybrid"
+      ],
+      "locations": [
+        "Lucknow",
+        "Remote - India"
+      ],
+      "relocation_required": false,
+      "interview_schedule": "Not stated",
+      "languages_required": [
+        "English",
+        "Hindi"
+      ],
+      "min_relevant_experience_years": 1,
+      "demand_signal": "stable",
+      "demand_note": "Team assumption. Illustrative only.",
+      "job_ids": [
+        "gomti-app-support-v1",
+        "gomti-app-support-v2"
+      ],
+      "requirements": [
+        {
+          "capability": "software_testing.defect_management",
+          "level": "intermediate",
+          "importance": "essential"
+        },
+        {
+          "capability": "enterprise_apps.sap_context",
+          "level": "basic",
+          "importance": "essential"
+        },
+        {
+          "capability": "data.sql",
+          "level": "basic",
+          "importance": "essential"
+        },
+        {
+          "capability": "communication.bilingual",
+          "level": "basic",
+          "importance": "essential"
+        },
+        {
+          "capability": "data.spreadsheet_analysis",
+          "level": "basic",
+          "importance": "preferred"
+        }
+      ]
+    },
+    {
+      "role_id": "data-quality-associate",
+      "title": "Data Quality Associate",
+      "summary": "Validates business data sets, reports anomalies and maintains data-quality dashboards.",
+      "work_modes": [
+        "remote"
+      ],
+      "locations": [
+        "Remote - India"
+      ],
+      "relocation_required": false,
+      "interview_schedule": "Not stated",
+      "languages_required": [
+        "English"
+      ],
+      "min_relevant_experience_years": 1,
+      "demand_signal": "stable",
+      "demand_note": "Team assumption. Illustrative only.",
+      "job_ids": [
+        "indus-data-quality-v1",
+        "indus-data-quality-v2"
+      ],
+      "requirements": [
+        {
+          "capability": "data.spreadsheet_analysis",
+          "level": "intermediate",
+          "importance": "essential"
+        },
+        {
+          "capability": "data.sql",
+          "level": "basic",
+          "importance": "essential"
+        },
+        {
+          "capability": "programming.python",
+          "level": "basic",
+          "importance": "essential"
+        },
+        {
+          "capability": "data_quality.profiling",
+          "level": "basic",
+          "importance": "essential"
+        },
+        {
+          "capability": "software_testing.defect_management",
+          "level": "basic",
+          "importance": "preferred"
+        }
+      ]
+    },
+    {
+      "role_id": "junior-frontend-developer",
+      "title": "Junior Frontend Developer",
+      "summary": "Builds user interface components for web applications.",
+      "work_modes": [
+        "hybrid"
+      ],
+      "locations": [
+        "Noida"
+      ],
+      "relocation_required": false,
+      "interview_schedule": "Not stated",
+      "languages_required": [
+        "English"
+      ],
+      "min_relevant_experience_years": 1,
+      "demand_signal": "growing",
+      "demand_note": "Team assumption. Illustrative only.",
+      "job_ids": [
+        "yamuna-frontend-v1",
+        "yamuna-frontend-v2"
+      ],
+      "requirements": [
+        {
+          "capability": "programming.javascript",
+          "level": "intermediate",
+          "importance": "essential"
+        },
+        {
+          "capability": "frontend.react",
+          "level": "basic",
+          "importance": "essential"
+        },
+        {
+          "capability": "version_control.git",
+          "level": "basic",
+          "importance": "essential"
+        },
+        {
+          "capability": "software_testing.manual",
+          "level": "basic",
+          "importance": "preferred"
+        }
+      ]
+    }
+  ]
+}
